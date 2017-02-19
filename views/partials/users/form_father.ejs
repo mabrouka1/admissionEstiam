@@ -1,0 +1,69 @@
+<div class="panel panel-info">
+    <div class="panel-heading">
+        Coordonnées du père
+    </div>
+    <div class="panel-body">
+        <form action="">
+            <div class="form-group col-md-4">
+                <label>Civilité:</label>
+                <select class="form-control">
+                    <option>Mr</option>
+                    <option>Mme</option>
+                    <option>Mlle</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Nom de Famille:</label>
+                <input data-validation="length custom" data-validation-regexp="^([a-zA-Z]+)$" data-validation-length="min2"  type="text" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+                <label>Prénom:</label>
+                <input data-validation="length custom" data-validation-regexp="^([a-zA-Z]+)$" data-validation-length="min2" type="text" class="form-control">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Adresse :</label>
+                <textarea data-validation="alphanumeric"  data-validation-allowing="-_'àèé" class="form-control"></textarea>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Complément adresse :</label>
+                <textarea data-validation="alphanumeric"  data-validation-allowing="-_'àèé" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label>Pays :</label>
+                <input data-validation="alphanumeric"  data-validation-allowing="-_'àèé" type="text" class="form-control country">
+            </div>
+            <div class="form-group col-md-4">
+                <label>Ville :</label>
+                <input data-validation="alphanumeric"  data-validation-allowing="-_'àèé" type="text" class="form-control">
+            </div>
+            <div class="form-group col-md-2">
+                <label>Code Postal :</label>
+                <input data-validation="number" type="text" class="form-control">
+            </div>
+            <div class="form-group col-md-3">
+                <label>Telephone Fixe:</label>
+                <input data-validation-regexp="^\+?[0-9]{6-15}$" type="text" class="form-control">
+            </div>
+            <div class="form-group col-md-3">
+                <label>Telephone Mobile :</label>
+                <input data-validation-regexp="^\+?[0-9]{6-15}$" data-validation="number" type="text" class="form-control">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Email :</label>
+                <input data-validation="email" type="email" class="form-control">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Emploi :</label>
+                <input data-validation="alphanumeric"  data-validation-allowing="-_'àèé" type="text" class="form-control">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Employeur :</label>
+                <input data-validation="alphanumeric"  data-validation-allowing="-_'àèé" type="email" class="form-control">
+            </div>
+
+
+
+        </form>
+    </div>
+</div>

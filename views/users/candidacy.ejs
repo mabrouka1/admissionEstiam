@@ -1,0 +1,61 @@
+<% layout('../layouts/user') %>
+<h1><%= title %></h1>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-sm-12  single">
+            <div class="alert alert-info fade in">
+                <p>Avec ce formulaire vous allez pouvoir soumettre votre demande d'admission au sein de
+                    l'ÉSTIAM mais avant de commencer, nous vous conseillons de vous assurer de disposer des éléments
+                    suivants <b>au format PDF</b> :
+                </p>
+                <ul>
+                    <li> 1 - une copie de votre <i>pièce d'identité</i> (CNI ou passeport), et celle de votre <i>titre
+                            de séjour</i> si vous n'êtes pas ressortissant d'un pays membre de l'Union Européenne,
+                    </li>
+                    <li> 2 - la copie de vos deux derniers <i>bulletins scolaires</i>,</li>
+                    <li> 3 - et enfin la copie de votre <i>diplôme le plus élevé</i>.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="wizard">
+            <ul class="wizard-steps" role="tablist">
+                <li class="active" role="tab">
+                  Informations
+                </li>
+                <li role="tab">
+                    Coordonnées du pére
+                </li>
+                <li role="tab">
+                    Coordonnées de la mére
+                </li>
+                <li role="tab">
+                    Coordonnées du tuteur
+                </li>
+
+                <li role="tab">
+                    Scolarité : Cursus
+                </li>
+                <li role="tab">
+                    Mes téléchargements
+                </li>
+                <li role="tab">
+                    Mes Voeux
+                </li>
+            </ul>
+            <div class="wizard-content">
+                <div data-title="info" class="wizard-pane active" role="tabpanel"><% include ../partials/users/form_infos.ejs %></div>
+                <div data-title="father" class="wizard-pane" role="tabpanel"> <% include ../partials/users/form_father.ejs %></div>
+                <div data-title="mother" class="wizard-pane" role="tabpanel"><% include ../partials/users/form_mother.ejs %></div>
+                <div data-title="tutor" class="wizard-pane" role="tabpanel"><% include ../partials/users/form_tutor.ejs %></div>
+                <div data-title="cursus" class="wizard-pane" role="tabpanel"><% include ../partials/users/form_cursus.ejs %></div>
+                <div data-title="files" class="wizard-pane" role="tabpanel"><% include ../partials/users/form_files.ejs %></div>
+                <div data-title="wish" class="wizard-pane" role="tabpanel"><% include ../partials/users/form_wish.ejs %></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript" src="/javascripts/candidacy_script.js"></script>
+

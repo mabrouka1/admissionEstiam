@@ -1,0 +1,69 @@
+<div class="panel panel-info">
+    <div class="panel-heading">
+     Mes telechargements
+    </div>
+
+
+    <div class="panel-body">
+        <form action="">
+            <div class="form-group col-md-3">
+                <label>Pièce d'Identité:</label>
+                <select class="form-control">
+                    <option>PASSPORT</option>
+                    <option>CNI</option>
+
+                </select>
+            </div>
+
+            <div class="form-group col-md-3">
+                <label>Numéro de la pièce d'identité:</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group col-md-3">
+                <label>Date d'expiration :</label>
+                <input type="text" class="form-control date">
+            </div>
+            <div class="form-group col-md-3">
+                <form enctype="multipart/form-data" action="fileupload.php" method="post">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+                    Transfère le fichier <input type="file" name="monfichier" />
+                </form>
+            </div>
+            <div class="form-group col-md-5">
+                <label>Titre de séjour : numéro du titre de séjour:</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+                <label>Date d'expiration :</label>
+                <input type="text" class="form-control date">
+            </div>
+            <div class="form-group col-md-3">
+                <form enctype="multipart/form-data" action="fileupload.php" method="post">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+                    Transfère le fichier <input type="file" name="monfichier" />
+                </form>
+            </div>
+            <div class="form-group col-md-4">
+                <form enctype="multipart/form-data" action="fileupload.php" method="post">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+                    Dernier bulletin scolaire <input type="file" name="monfichier" />
+                </form>
+            </div>
+            <div class="form-group col-md-4">
+                <form enctype="multipart/form-data" action="fileupload.php" method="post">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+                    Bulletin scolaire précédent <input type="file" name="monfichier" />
+                </form>
+            </div>
+            <div class="form-group col-md-4">
+                <form enctype="multipart/form-data" action="fileupload.php" method="post">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+                    Diplôme le plus élevé <input type="file" name="monfichier" />
+                </form>
+            </div>
+
+
+
+        </form>
+    </div>
+</div>
