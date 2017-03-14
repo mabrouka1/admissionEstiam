@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="wizard">
+        <div id="wizard" class="wizard">
             <ul class="wizard-steps" role="tablist">
                 <li class="active" role="tab">
                   Informations
@@ -52,6 +52,13 @@
                 <div data-title="cursus" class="wizard-pane" role="tabpanel"><% include ../partials/users/form_cursus.ejs %></div>
                 <div data-title="files" class="wizard-pane" role="tabpanel"><% include ../partials/users/form_files.ejs %></div>
                 <div data-title="wish" class="wizard-pane" role="tabpanel"><% include ../partials/users/form_wish.ejs %></div>
+            </div>
+            <div class="pagination pagination-lg pull-right">
+                <ul>
+                    <il>
+                        <button type="button" class="btn btn-success save-form">Enregistrer</button>
+                    </il>
+                </ul>
             </div>
         </div>
 

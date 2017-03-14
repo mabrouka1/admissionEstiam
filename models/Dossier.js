@@ -1,13 +1,16 @@
 var mongoose = require('mongoose');
 
 var dossierSchema = new mongoose.Schema({
+    _id: String,
     civilite: {
         nom: String,
         prenom: { type: String, trim: true },
         nom_d_naiss: String,
         dept_d_naiss:  Number,
         ville_d_naiss: String,
-        date_d_naiss: { type: Number, min: 0 },
+        pays_d_naiss: String,
+        nationalite: String,
+        date_d_naiss: { type: Date},
     },
 
         adresse:{

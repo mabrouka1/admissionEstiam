@@ -62,7 +62,9 @@ router.post('/signin', function (req, res, next) {
 
     if (errors) {
         for (err in errors) {
-            req.flash('error', errors[err].msg);
+            if (errors.hasOwnProperty(err)) {
+                req.flash('error', errors[err].msg);
+            }
         }
 
         return res.redirect('/');
@@ -74,7 +76,9 @@ router.post('/signin', function (req, res, next) {
         }
         if (!user) {
             for (inf in info) {
-                req.flash('info', info[inf].msg);
+                if (info.hasOwnProperty(inf)) {
+                    req.flash('info', info[inf].msg);
+                }
             }
             return res.redirect('/');
         }
@@ -100,7 +104,9 @@ router.post('/signup', function (req, res, next) {
 
     if (errors) {
         for (err in errors) {
-            req.flash('error', errors[err].msg);
+            if (errors.hasOwnProperty(err)) {
+                req.flash('error', errors[err].msg);
+            }
         }
 
         return res.redirect('/');
