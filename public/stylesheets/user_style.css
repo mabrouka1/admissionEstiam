@@ -130,7 +130,6 @@ nav.sidebar, .main{
     /*Allow main to be next to Nav*/
     .main{
         width: calc(100% - 200px); /*keeps 100% minus nav size*/
-        margin-left: 200px;
     }
 
     /*Show all nav*/
