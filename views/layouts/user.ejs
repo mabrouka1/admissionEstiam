@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/users/head.ejs %>
+</head>
+
+<body>
+
+<% include ../partials/users/header.ejs %>
+
+<!-- Insert Body here -->
+<div class="container">
+
+    <div class="main">
+        <div class="row">
+            <% if(messages && messages.success) { %>
+            <div class="alert alert-success">
+                <strong>Success!</strong>
+                <%= messages.success %>
+            </div>
+            <% } %>
+            <% if(messages && messages.info) { %>
+            <div class="alert alert-info">
+                <strong>Info!</strong>
+                <%= messages.info %>
+            </div>
+            <% } %>
+
+            <% if(messages && messages.error) { %>
+            <div class="alert alert-danger">
+                <strong>Error!</strong>
+                <%=messages.error %>
+
+            </div>
+            <% } %>
+        </div>
+        <div class="row">
+            <%- body %>
+        </div>
+    </div>
+
+</div><!-- /.container -->
+
+<% include ../partials/users/footer.ejs %>
+
+</body>
+</html>

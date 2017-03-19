@@ -1,0 +1,37 @@
+
+<!-- Navigation -->
+<nav class="navbar navbar-inverse sidebar" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img src="//www.estiam.com/wp-content/uploads/logo_estiam.jpeg" alt=""></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="<%= typeof dashboard!= 'undefined' ? dashboard : ''%>"><a href="/users">Dashboard<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+                <li class="<%= typeof profile!= 'undefined' ? profile : ''%>"><a href="#">Profile<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
+                <li class="dropdown <%= typeof admission!= 'undefined' ? admission : ''%>">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admission <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-briefcase"></span></a>
+                    <ul class="dropdown-menu forAnimate" role="menu">
+                        <li class="<%= typeof candidacy!= 'undefined' ? candidacy : ''%>"><a href="/users/candidacy">Mon dossier</a></li>
+                        <li><a href="#">Mon Inscription</a></li>
+                        <li><a href="#">Mon Alternance </a></li>
+
+                        <li class="divider"></li>
+                        <li><a href="#">Attestations</a></li>
+
+                    </ul>
+                </li>
+                <li class="<%=messages%>"><a href="#">Messages<span class="badge pull-right">5</span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-envelope"></span></a></li>
+                <li class="signout"><a href="/signout">Déconnexion<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-off"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
