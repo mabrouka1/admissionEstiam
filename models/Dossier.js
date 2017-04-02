@@ -115,6 +115,7 @@ var dossierSchema = new mongoose.Schema({
             previous: {
                 year: String,
                 precisez: String,
+                school:String,
                 adresse: {
                     address: String,
                     compl_adresse: String,

@@ -151,12 +151,15 @@
             <div class="form-group col-md-12">
                 <label>Établissement scolaire fréquenté l'année dernière :</label>
                 <div class="radio">
-                    <label class="radio-inline">
-                        <input type="radio" name="optradio">identique à l'établissement fréquenté l'année suivante
+                    <label class="radio">
+                        <input type="radio" name="previous[school]"<%= (exist && existingCandidacy.cursus.previous.school == 'identique' ? 'checked ="checked"' : '') %>
+                               value="identique">identique à l'établissement fréquenté l'année suivante
                     </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="optradio">différent de l'établissement fréquenté l'année
-                        suivante
+                    <label class="radio">
+
+                        <input type="radio" name="previous[school]"<%= (exist && existingCandidacy.cursus.previous.school == 'different' ? 'checked ="checked"' : '') %>
+                               value="different">différent de l'établissement fréquenté l'année
+
                     </label>
                 </div>
 
