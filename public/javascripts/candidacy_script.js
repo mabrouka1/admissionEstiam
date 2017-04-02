@@ -47,7 +47,7 @@ $(function () {
         form.trigger('validation');
         var isValid = form.isValid();
         if (isValid) {
-            var data = $(form).serializeObject();
+            var data = $(form).serializeJSON();
             $.post('/users/candidacy', data)
                 .done(function (response) {
                     console.log(response);
@@ -92,19 +92,12 @@ $(function () {
 
 });
 
-
-$.fn.serializeObject = function () {
-    var o = {};
-    var a = this.serializeArray();
-    $.each(a, function () {
-        if (o[this.name]) {
-            if (!o[this.name].push) {
-                o[this.name] = [o[this.name]];
-            }
-            o[this.name].push(this.value || '');
-        } else {
-            o[this.name] = this.value || '';
-        }
-    });
-    return o;
-};
+$.fn.extend({
+    serializeJSON: function(exclude) {
+        exclude || (exclude = []);
+        return this.serializeArray().reduce(function(hash, pair) {
+            pair.value && !(pair.name in exclude) && (hash[pair.name] = pair.value);
+            return hash;
+        }, {});
+    }
+});

@@ -1,97 +1,151 @@
-<div class="panel panel-info">
-    <div class="panel-heading">
-        dernière année scolaire
-    </div>
-    <div class="panel-body">
-        <form action="">
-            <div class="form-group col-md-4">
-                <label>Dernière année scolaire:</label>
-                <select class="form-control">
-                    <option>2015-2016</option>
-                    <option>2014-2015</option>
-                    <option>2013-2014</option>
-                    <option>Autres</option>
+<% var exist =  ( existingCandidacy != null &&  existingCandidacy.cursus != null ? true : false) %>
+
+<form>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            dernière année scolaire
+        </div>
+        <div class="panel-body">
+
+            <input type="hidden" name="form" value="form_cursus">
+            <div class="form-group col-md-3">
+                <label>annee scolaire:</label>
+                <select name='last[year]' class="form-control">
+                    <option <%= (exist && existingCandidacy.cursus.last.year == '2015-2016' ? 'selected' : '') %>
+                            value="2015-2016">2015-2016
+                    </option>
+                    <option <%= (exist && existingCandidacy.cursus.last.year == '2015-2014' ? 'selected' : '') %>
+                            value="2015-2014">2015-2014
+                    </option>
+                    <option <%= (exist && existingCandidacy.cursus.last.year == '2014-2013' ? 'selected' : '') %>
+                            value="2014-2013">2014-2013
+                    </option>
+                    <option <%= (exist && existingCandidacy.cursus.last.year == 'Autres' ? 'selected' : '') %>
+                            value="Autres">Autres
+                    </option>
+
                 </select>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
                 <label>Précisez :</label>
-                <input type="text" class="form-control">
+                <input value="<%= (exist && typeof existingCandidacy.cursus.last.precisez != 'undefined' ? existingCandidacy.cursus.last.precisez : '') %>"
+                       name='last[precisez]'
+                       data-validation="length" data-validation-length="min1" type="text" class="form-control">
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-5">
                 <label>Dernier établissement scolaire :</label>
-                <input type="text" class="form-control">
+                <input value="<%= (exist && typeof existingCandidacy.cursus.last.school != 'undefined'? existingCandidacy.cursus.last.school : '') %>"
+                       name='last[school]'
+                       data-validation="length" data-validation-length="min1" type="text" class="form-control">
             </div>
             <div class="form-group col-md-6">
                 <label>Adresse :</label>
-                <textarea class="form-control"></textarea>
+                <textarea name='last[address]'
+                          data-validation="length custom" data-validation-regexp="^([a-zA-Z\s\S]+)$"
+                          data-validation-length="min2"
+                          class="form-control"><%= (exist && typeof existingCandidacy.cursus.last.adresse.address != 'undefined' ? existingCandidacy.cursus.last.adresse.address : '') %></textarea>
             </div>
             <div class="form-group col-md-6">
                 <label>Complément adresse :</label>
-                <textarea class="form-control"></textarea>
+                <textarea name='last[compl_adresse']
+                          data-validation="length custom" data-validation-regexp="^([a-zA-Z\s\S]+)$"
+                          data-validation-length="min2"
+                          class="form-control"><%= (exist && typeof existingCandidacy.cursus.last.adresse.compl_adresse != 'undefined' ? existingCandidacy.cursus.last.adresse.compl_adresse : '') %></textarea>
             </div>
-
             <div class="form-group col-md-6">
                 <label>Pays :</label>
-                <input type="text" class="form-control country">
+                <input value="<%= (exist && typeof existingCandidacy.cursus.last.adresse.pays != 'undefined'  ? existingCandidacy.cursus.last.adresse.pays : '') %>"
+                       name='last[pays]' data-validation="length custom"
+                       data-validation-regexp="^([a-zA-Z\s\S]+)$"
+                       data-validation-length="min2" type="text" class="form-control country">
             </div>
             <div class="form-group col-md-4">
                 <label>Ville :</label>
-                <input type="text" class="form-control">
+                <input value="<%= (exist && typeof existingCandidacy.cursus.last.adresse.ville != 'undefined' ? existingCandidacy.cursus.last.adresse.ville : '') %>"
+                       name='last[ville]' data-validation="length custom"
+                       data-validation-regexp="^([a-zA-Z\s\S]+)$"
+                       data-validation-length="min2" type="text" class="form-control">
             </div>
             <div class="form-group col-md-2">
                 <label>Code Postal :</label>
-                <input type="text" class="form-control">
+                <input value="<%= (exist && typeof existingCandidacy.cursus.last.adresse.code_postal != 'undefined' ? existingCandidacy.cursus.last.adresse.code_postal : '') %>"
+                       name='last[code_postal]' data-validation="number"
+                       type="text" class="form-control">
             </div>
             <div class="form-group col-md-6">
-                <label>Classe :</label>
-                <textarea class="form-control"></textarea>
+                <label>classe :</label>
+                <input value="<%= (exist && typeof existingCandidacy.cursus.last.class != 'undefined' ? existingCandidacy.cursus.last.class : '') %>"
+                       name='last[class]'data-validation="length custom"
+                       data-validation-regexp="^([a-zA-Z\s\S]+)$"
+                       data-validation-length="min2" type="text" class="form-control">
             </div>
             <div class="form-group col-md-6">
                 <label>Spécialité :</label>
-                <textarea class="form-control"></textarea>
+                <input value="<%= (exist && typeof existingCandidacy.cursus.last.speciality != 'undefined' ? existingCandidacy.cursus.last.speciality : '') %>"
+                       name='last[speciality]' data-validation="length custom"
+                       data-validation-regexp="^([a-zA-Z\s\S]+)$"
+                       data-validation-length="min2" type="text" class="form-control">
             </div>
-
             <div class="form-group col-md-6">
-                <label>Niveau scolaire:</label>
-                <select class="form-control">
-                    <option>Bac+5</option>
-                    <option>Bac+4</option>
-                    <option>Bac+3</option>
-                    <option>Bac+2</option>
-                    <option>Bac+1</option>
-                    <option>Terminale</option>
-                    <option>Autres</option>
+                <label>Niveau Scolaire:</label>
+                <select name='last[level]' class="form-control">
+                    <option <%= (exist && existingCandidacy.cursus.level == 'Bac+5' ? 'selected' : '') %>
+                            value="Bac+5">Bac+5
+                    </option>
+                    <option <%= (exist && existingCandidacy.cursus.level == 'Bac+4' ? 'selected' : '') %>
+                            value="Bac+4">Bac+4
+                    </option>
+                    <option <%= (exist && existingCandidacy.cursus.level == 'Bac+3' ? 'selected' : '') %>
+                            value="Bac+3">Bac+3
+                    </option>
+                    <option <%= (exist && existingCandidacy.cursus.level == 'Bac+2' ? 'selected' : '') %>
+                            value="Bac+2">Bac+2
+                    </option>
+                    <option <%= (exist && existingCandidacy.cursus.level == 'Terminale' ? 'selected' : '') %>
+                            value="Terminale">Terminale
+                    </option>
+
+
                 </select>
             </div>
             <div class="form-group col-md-6">
                 <label>Précisez :</label>
-                <input type="text" class="form-control">
+                <input value="<%= (exist && typeof existingCandidacy.cursus.last.other != 'undefined' ? existingCandidacy.cursus.last.other : '') %>"
+                       name='last[other]'
+                       data-validation="length" data-validation-length="min1" type="text" class="form-control">
             </div>
 
-
-        </form>
+        </div>
     </div>
-</div>
 
 
-<div class="panel panel-info">
-    <div class="panel-heading">
-        Année scolaire précédente
-    </div>
-    <div class="panel-body">
-        <form action="">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            Année scolaire précédente
+        </div>
+        <div class="panel-body">
             <div class="form-group col-md-4">
                 <label>Dernière année scolaire:</label>
-                <select class="form-control" data-validation="required">
-                    <option>2013-2014</option>
-                    <option>2012-2013</option>
-                    <option>2011-2012</option>
-                    <option>Autres</option>
+                <select name='previous[year]' class="form-control" data-validation="required">
+                    <option <%= (exist && existingCandidacy.cursus.previous.year == '2013-2014' ? 'selected' : '') %>
+                            value="2013-2014">2013-2014
+                    </option>
+                    <option <%= (exist && existingCandidacy.cursus.previous.year == '2012-2013' ? 'selected' : '') %>
+                            value="2012-2013">2012-2013
+                    </option>
+                    <option <%= (exist && existingCandidacy.cursus.previous.year == '2011-2012' ? 'selected' : '') %>
+                            value="2011-2012">2011-2012
+                    </option>
+                    <option <%= (exist && existingCandidacy.cursus.previous.year == 'Autres' ? 'selected' : '') %>
+                            value="Autres">Autres
+                    </option>
                 </select>
             </div>
             <div class="form-group col-md-8">
                 <label>Précisez :</label>
-                <input type="text" class="form-control">
+                <input value="<%= (exist && typeof existingCandidacy.cursus.previous.precisez != 'undefined' ? existingCandidacy.cursus.previous.precisez : '') %>"
+                       name='previous[precisez]'
+                       data-validation="length" data-validation-length="min1" type="text" class="form-control">
             </div>
 
             <div class="form-group col-md-12">
@@ -111,52 +165,87 @@
 
             <div class="form-group col-md-6">
                 <label>Adresse :</label>
-                <textarea data-validation="alphanumeric"  data-validation-allowing="-_'àèé" class="form-control"></textarea>
+                <textarea name='previous[address]'
+                          data-validation="length custom" data-validation-regexp="^([a-zA-Z\s\S]+)$"
+                          data-validation-length="min2"
+                          class="form-control"><%= (exist && typeof existingCandidacy.cursus.previous.adresse.address != 'undefined' ? existingCandidacy.cursus.previous.adresse.address : '') %></textarea>
             </div>
             <div class="form-group col-md-6">
                 <label>Complément adresse :</label>
-                <textarea data-validation="alphanumeric"  data-validation-allowing="-_'àèé"  class="form-control"></textarea>
+                <textarea name='previous[compl_adresse']
+                          data-validation="length custom" data-validation-regexp="^([a-zA-Z\s\S]+)$"
+                          data-validation-length="min2"
+                          class="form-control"><%= (exist && typeof existingCandidacy.cursus.previous.adresse.compl_adresse != 'undefined' ? existingCandidacy.cursus.previous.adresse.compl_adresse : '') %></textarea>
             </div>
-
             <div class="form-group col-md-6">
                 <label>Pays :</label>
-                <input  data-validation="alphanumeric"  data-validation-allowing="-_'àèé" type="text" class="form-control country">
+                <input value="<%= (exist && typeof existingCandidacy.cursus.previous.adresse.pays != 'undefined'  ? existingCandidacy.cursus.previous.adresse.pays : '') %>"
+                       name='previous[pays]' data-validation="length custom"
+                       data-validation-regexp="^([a-zA-Z\s\S]+)$"
+                       data-validation-length="min2" type="text" class="form-control country">
             </div>
             <div class="form-group col-md-4">
                 <label>Ville :</label>
-                <input data-validation="alphanumeric"  data-validation-allowing="-_'àèé" type="text" class="form-control">
+                <input value="<%= (exist && typeof existingCandidacy.cursus.previous.adresse.ville != 'undefined' ? existingCandidacy.cursus.previous.adresse.ville : '') %>"
+                       name='previous[ville]' data-validation="length custom"
+                       data-validation-regexp="^([a-zA-Z\s\S]+)$"
+                       data-validation-length="min2" type="text" class="form-control">
             </div>
             <div class="form-group col-md-2">
                 <label>Code Postal :</label>
-                <input data-validation="number" type="text" class="form-control">
+                <input value="<%= (exist && typeof existingCandidacy.cursus.previous.adresse.code_postal != 'undefined' ? existingCandidacy.cursus.previous.adresse.code_postal : '') %>"
+                       name='previous[code_postal]' data-validation="number"
+                       type="text" class="form-control">
             </div>
             <div class="form-group col-md-6">
-                <label>Classe :</label>
-                <textarea data-validation="length" data-validation-length="min2" class="form-control"></textarea>
+                <label>classe :</label>
+                <input value="<%= (exist && typeof existingCandidacy.cursus.previous.class != 'undefined'? existingCandidacy.cursus.previous.class : '') %>"
+                       name='previous[class]'data-validation="length custom"
+                       data-validation-regexp="^([a-zA-Z\s\S]+)$"
+                       data-validation-length="min2" type="text" class="form-control">
             </div>
             <div class="form-group col-md-6">
                 <label>Spécialité :</label>
-                <textarea data-validation="length" data-validation-length="min2"class="form-control"></textarea>
+                <input value="<%= (exist && typeof existingCandidacy.cursus.previous.speciality != 'undefined' ? existingCandidacy.cursus.previous.speciality : '') %>"
+                       name='previous[speciality]' data-validation="length custom"
+                       data-validation-regexp="^([a-zA-Z\s\S]+)$"
+                       data-validation-length="min2" type="text" class="form-control">
             </div>
-
             <div class="form-group col-md-6">
-                <label>Niveau scolaire:</label>
-                <select class="form-control" data-validation="required">
-                    <option>Bac+5</option>
-                    <option>Bac+4</option>
-                    <option>Bac+3</option>
-                    <option>Bac+2</option>
-                    <option>Bac+1</option>
-                    <option>Terminale</option>
-                    <option>Autres</option>
+                <label>Niveau Scolaire:</label>
+                <select name='previous[level]' class="form-control">
+                    <option <%= (exist && existingCandidacy.cursus.level == 'Bac+5' ? 'selected' : '') %>
+                            value="Bac+5">Bac+5
+                    </option>
+                    <option <%= (exist && existingCandidacy.cursus.level == 'Bac+4' ? 'selected' : '') %>
+                            value="Bac+4">Bac+4
+                    </option>
+                    <option <%= (exist && existingCandidacy.cursus.level == 'Bac+3' ? 'selected' : '') %>
+                            value="Bac+3">Bac+3
+                    </option>
+                    <option <%= (exist && existingCandidacy.cursus.level == 'Bac+2' ? 'selected' : '') %>
+                            value="Bac+2">Bac+2
+                    </option>
+                    <option <%= (exist && existingCandidacy.cursus.level == 'Terminale' ? 'selected' : '') %>
+                            value="Terminale">Terminale
+                    </option>
+
+
                 </select>
             </div>
             <div class="form-group col-md-6">
                 <label>Précisez :</label>
-                <input type="text" class="form-control">
+                <input value="<%= (exist && typeof existingCandidacy.cursus.previous.other != 'undefined' ? existingCandidacy.cursus.previous.other : '') %>"
+                       name='previous[other]'
+                       data-validation="length" data-validation-length="min1" type="text" class="form-control">
             </div>
 
 
-        </form>
+        </div>
     </div>
-</div>
+
+
+
+
+</form>
+

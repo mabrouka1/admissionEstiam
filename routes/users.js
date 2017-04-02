@@ -16,7 +16,6 @@ router.get('/', function (req, res, next) {
 /* GET users Home. */
 router.get('/candidacy', function (req, res, next) {
     Candidacy.findOne({_id: req.user._id}, function (err, existingCandidacy) {
-        console.log(existingCandidacy.candidate.civilite);
         res.render('users/candidacy', {
             admission: 'active',
             candidacy: 'active',
@@ -45,9 +44,8 @@ router.post('/candidacy', function (req, res, next) {
 
         return;
     }
-    var data = req.body;
+    var data = parseInputs(req.body);
     var candidacy = null;
-
     switch (data.form) {
         case 'form_info':
             candidacy = {
@@ -80,39 +78,144 @@ router.post('/candidacy', function (req, res, next) {
             };
             break;
         case 'form_father':
-            try {
-
-                candidacy = new Candidacy({
-
-                    _id: req.user._id,
-                    father: {
-                        civilite: data.civilite,
-                        nom: data.nom,
-                        prenom: data.prenom,
-                        adresse: data.adresse,
+            candidacy = {
+                _id: req.user._id,
+                father: {
+                    civilite: data.civilite,
+                    nom: data.nom,
+                    prenom: data.prenom,
+                    adresse: {
+                        address: data.address,
                         compl_adresse: data.compl_adresse,
                         pays: data.pays,
                         ville: data.ville,
                         code_postal: data.code_postal,
-
-                        contact: {
-                            telfixe: data.telfixe,
-                            telmob: data.telmob,
-                            email: data.email,
-                            skype: data.skype,
-                            emploi: data.emploi,
-                            employeur: data.employeur
-                        },
                     },
-                });
+                    contact: {
+                        telfixe: data.telfixe,
+                        telmob: data.telmob,
+                        email: data.email,
+                        skype: data.skype,
+                        emploi: data.emploi,
+                        employeur: data.employeur
+                    }
+                },
+            };
+            break;
 
+        case 'form_mother':
+            candidacy = {
+                _id: req.user._id,
+                mother: {
+                    civilite: data.civilite,
+                    nom: data.nom,
+                    prenom: data.prenom,
+                    adresse: {
+                        address: data.address,
+                        compl_adresse: data.compl_adresse,
+                        pays: data.pays,
+                        ville: data.ville,
+                        code_postal: data.code_postal,
+                    },
+                    contact: {
+                        telfixe: data.telfixe,
+                        telmob: data.telmob,
+                        email: data.email,
+                        skype: data.skype,
+                        emploi: data.emploi,
+                        employeur: data.employeur
+                    }
+                },
+            };
+            break;
 
-            } catch (err) {
-                res.render('json/index', {
-                    message: err
-                });
-            }
+        case 'form_tutor':
+            candidacy = {
+                _id: req.user._id,
+                tutor: {
+                    civilite: data.civilite,
+                    nom: data.nom,
+                    prenom: data.prenom,
+                    adresse: {
+                        address: data.address,
+                        compl_adresse: data.compl_adresse,
+                        pays: data.pays,
+                        ville: data.ville,
+                        code_postal: data.code_postal,
+                    },
+                    contact: {
+                        telfixe: data.telfixe,
+                        telmob: data.telmob,
+                        email: data.email,
+                        skype: data.skype,
+                        emploi: data.emploi,
+                        employeur: data.employeur
+                    }
+                },
+            };
+            break;
+
+        case 'form_cursus':
+
+            candidacy = {
+                _id: req.user._id,
+                cursus: {
+                    last: {
+                        year: data.last.year,
+                        precisez: data.last.precisez,
+                        school: data.last.school,
+                        adresse: {
+                            address: data.last.address,
+                            compl_adresse: data.last.compl_adresse,
+                            pays: data.last.pays,
+                            ville: data.last.ville,
+                            code_postal: data.last.code_postal
+                        },
+                        class: data.last.class,
+                        speciality: data.last.speciality,
+                        level: data.last.level,
+                        other: data.last.other
+                    },
+
+                    previous: {
+                        year: data.previous.year,
+                        precisez: data.previous.precisez,
+                        school: data.previous.school,
+                        adresse: {
+                            address: data.previous.address,
+                            compl_adresse: data.previous.compl_adresse,
+                            pays: data.previous.pays,
+                            ville: data.previous.ville,
+                            code_postal: data.previous.code_postal
+                        },
+                        class: data.previous.class,
+                        speciality: data.previous.speciality,
+                        level: data.previous.level,
+                        other: data.previous.other
+                    },
+
+                },
+            };
+
+            break;
+
+        case 'form_wish':
+            candidacy = {
+                _id: req.user._id,
+                wish: {
+                    year: data.year,
+                    cursus: data.cursus,
+                    precisez: data.precisez,
+                    campus : data.campus,
+                    message : data.message,
+
+                },
+
+            };
+            break;
+
         default:
+            console.log(data);
             res.json({message: 'Invalid Form Type'});
             return;
             break;
@@ -122,7 +225,7 @@ router.post('/candidacy', function (req, res, next) {
         res.json({message: result});
     }).catch(function (err) {
         res.json({message: err});
-    })
+    });
 
 });
 
@@ -131,6 +234,33 @@ function saveOrUpdateCandidateForm(id, candidacy) {
         upsert: true,
         setDefaultsOnInsert: true
     })
+}
+
+function parseInputs(data) {
+    var ret = {};
+    retloop:
+        for (var input in data) {
+            var val = data[input];
+
+            var parts = input.split('[');
+            var last = ret;
+
+            for (var i in parts) {
+                var part = parts[i];
+                if (part.substr(-1) == ']') {
+                    part = part.substr(0, part.length - 1);
+                }
+
+                if (i == parts.length - 1) {
+                    last[part] = val;
+                    continue retloop;
+                } else if (!last.hasOwnProperty(part)) {
+                    last[part] = {};
+                }
+                last = last[part];
+            }
+        }
+    return ret;
 }
 
 

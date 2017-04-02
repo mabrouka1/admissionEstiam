@@ -1,3 +1,5 @@
+<% var exist =  ( existingCandidacy != null &&  existingCandidacy.candidate != null ? true : false) %>
+
 <div class="panel panel-info">
     <div class="panel-heading">
         Coordonnées du père
@@ -7,81 +9,81 @@
             <input type="hidden" name="form" value="form_father">
             <div class="form-group col-md-4">
                 <label>Civilité:</label>
-                <select class="form-control">
-                    <option>Mr</option>
-                    <option>Mme</option>
-                    <option>Mlle</option>
+                <select name='civilite' class="form-control">
+                    <option <%= (exist && existingCandidacy.father.civilite == 'Mr' ? 'selected' :'')%> value="Mr">Mr</option>
+                    <option <%= (exist && existingCandidacy.father.civilite == 'MMe' ? 'selected' :'')%> value="MMe">Mme</option>
+                    <option <%= (exist && existingCandidacy.father.civilite == 'Mlle' ? 'selected' :'')%> value="Mlle">Mlle</option>
                 </select>
             </div>
             <div class="form-group col-md-4">
                 <label>Nom de Famille:</label>
-                <input  value="<%= (typeof existingCandidacy != "undefined" && existingCandidacy != null ? existingCandidacy.father.nom :'')%>" name="nom" data-validation="length custom"
+                <input  value="<%= (exist && typeof existingCandidacy.father.nom != 'undefined'? existingCandidacy.father.nom :'')%>" name="nom" data-validation="length custom"
                         data-validation="length custom"
                         data-validation-regexp="^([a-zA-Z]+)$"
                         data-validation-length="min2"  type="text" class="form-control">
             </div>
             <div class="form-group col-md-4">
                 <label>Prénom:</label>
-                <input value="<%= (typeof existingCandidacy != "undefined" && existingCandidacy != null ? existingCandidacy.father.prenom :'')%>" name="prenom" data-validation="length custom"
+                <input value="<%= (exist && typeof existingCandidacy.father.prenom != 'undefined'? existingCandidacy.father.prenom :'')%>" name="prenom" data-validation="length custom"
                         data-validation="length custom"
                         data-validation-regexp="^([a-zA-Z]+)$" data-validation-length="min2" type="text" class="form-control">
             </div>
             <div class="form-group col-md-6">
                 <label>Adresse :</label>
-                <textarea name="adresse"
+                <textarea name="address"
                           data-validation="length custom" data-validation-regexp="^([a-zA-Z\s\S]+)$"
-                          data-validation-length="min2" class="form-control"><%= (typeof existingCandidacy != "undefined" && existingCandidacy != null ? existingCandidacy.father.adresse :'')%>
-</textarea>
+                          data-validation-length="min2" class="form-control"><%= (exist && typeof existingCandidacy.father.adresse.address != 'undefined'? existingCandidacy.father.adresse.address :'')%></textarea>
             </div>
             <div class="form-group col-md-6">
                 <label>Complément adresse :</label>
                 <textarea name="compl_adresse"
                           data-validation="length custom" data-validation-regexp="^([a-zA-Z\s\S]+)$"
-                          data-validation-length="min2" class="form-control"><%= (typeof existingCandidacy != "undefined" && existingCandidacy != null ? existingCandidacy.father.compl_adresse :'')%>
+                          data-validation-length="min2" class="form-control"><%= (exist && typeof existingCandidacy.father.adresse.compl_adresse != 'undefined'?  existingCandidacy.father.adresse.compl_adresse :'')%>
 </textarea>
             </div>
 
             <div class="form-group col-md-6">
                 <label>Pays :</label>
-                <input value= "<%= (typeof existingCandidacy != "undefined" && existingCandidacy != null ? existingCandidacy.father.pays :'')%>" name="pays" data-validation="length custom"
+                <input value= "<%= (exist && typeof existingCandidacy.father.adresse.pays != 'undefined'? existingCandidacy.father.adresse.pays :'')%>" name="pays" data-validation="length custom"
                        data-validation-regexp="^([a-zA-Z\s\S]+)$"
                        data-validation-length="min2" type="text" class="form-control country">
             </div>
             <div class="form-group col-md-4">
                 <label>Ville :</label>
-                <input value= "<%= (typeof existingCandidacy != "undefined" && existingCandidacy != null ? existingCandidacy.father.ville :'')%>" name="ville" data-validation="length custom"
+                <input value= "<%= (exist && typeof existingCandidacy.father.adresse.ville != 'undefined'? existingCandidacy.father.adresse.ville :'')%>" name="ville" data-validation="length custom"
                        data-validation-regexp="^([a-zA-Z\s\S]+)$"
                        data-validation-length="min2" type="text" class="form-control">
             </div>
             <div class="form-group col-md-2">
                 <label>Code Postal :</label>
-                <input value= "<%= (typeof existingCandidacy != "undefined" && existingCandidacy != null ? existingCandidacy.father.code_postal :'')%>" name="code_postal"
+                <input value= "<%= (exist && typeof existingCandidacy.father.adresse.code_postal != 'undefined'? existingCandidacy.father.adresse.code_postal :'')%>" name="code_postal"
                         data-validation="number" type="text" class="form-control">
             </div>
             <div class="form-group col-md-3">
                 <label>Telephone Fixe:</label>
-                <input  value="<%= (typeof existingCandidacy != "undefined" && existingCandidacy != null ? existingCandidacy.father.contact.telfixe :'')%>" name="telfixe" data-validation="custom"
-                        data-validation-regexp="^\+?[0-9]{6-15}$" type="text" class="form-control">
+                <input  value="<%= (exist && typeof existingCandidacy.father.contact.telfixe != 'undefined'? existingCandidacy.father.contact.telfixe :'')%>" name="telfixe" data-validation="custom"
+                        data-validation-regexp="^\+?[0-9]{6,15}$" type="text"
+                        class="form-control">
             </div>
             <div class="form-group col-md-3">
                 <label>Telephone Mobile :</label>
-                <input value="<%= (typeof existingCandidacy != "undefined" && existingCandidacy != null ? existingCandidacy.father.contact.telmob :'')%>" name="telmob" data-validation="custom"
+                <input value="<%= (exist && typeof existingCandidacy.father.contact.telmob != 'undefined'? existingCandidacy.father.contact.telmob :'')%>" name="telmob" data-validation="custom"
                        data-validation-regexp="^\+?[0-9]{6,15}$" type="text"class="form-control">
             </div>
             <div class="form-group col-md-6">
                 <label>Email :</label>
-                <input  value="<%= (typeof existingCandidacy != "undefined" && existingCandidacy != null ? existingCandidacy.father.contact.email :'')%>" name="email" data-validation="custom"
-                        data-validation="email" type="email" class="form-control">
+                <input  value="<%= (exist && typeof existingCandidacy.father.contact.email != 'undefined'? existingCandidacy.father.contact.email :'')%>" name="email" data-validation="email" type="email"
+                        class="form-control">
             </div>
             <div class="form-group col-md-6">
                 <label>Emploi :</label>
-                <input  value="<%= (typeof existingCandidacy != "undefined" && existingCandidacy != null ? existingCandidacy.father.contact.emploi :'')%>" name="emploi" data-validation="custom"
+                <input  value="<%= (exist && typeof existingCandidacy.father.contact.emploi != 'undefined'? existingCandidacy.father.contact.emploi :'')%>" name="emploi" data-validation="custom"
                         data-validation="length"   type="text" class="form-control">
             </div>
             <div class="form-group col-md-6">
                 <label>Employeur :</label>
-                <input  value="<%= (typeof existingCandidacy != "undefined" && existingCandidacy != null ? existingCandidacy.father.contact.employeur :'')%>" name="employeur" data-validation="custom"
-                        data-validation="length"  type="email" class="form-control">
+                <input  value="<%= (exist && typeof existingCandidacy.father.contact.employeur != 'undefined'? existingCandidacy.father.contact.employeur :'')%>" name="employeur" data-validation="custom"
+                        data-validation="length"  type="text" class="form-control">
             </div>
 
 

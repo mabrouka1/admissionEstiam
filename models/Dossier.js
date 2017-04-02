@@ -21,8 +21,8 @@ var dossierSchema = new mongoose.Schema({
             code_postal: Number,
         },
         contact: {
-            telfixe: {type: Number, min: 0},
-            telmob: {type: Number, min: 0},
+            telfixe: String,
+            telmob: String,
             email: String,
             skype: String,
         }
@@ -39,11 +39,9 @@ var dossierSchema = new mongoose.Schema({
             ville: String,
             code_postal: Number,
         },
-
-
         contact: {
-            telfixe: {type: Number, min: 0},
-            telmob: {type: Number, min: 0},
+            telfixe: String,
+            telmob: String,
             email: String,
             skype: String,
             emploi: String,
@@ -64,8 +62,8 @@ var dossierSchema = new mongoose.Schema({
         },
 
         contact: {
-            telfixe: {type: Number, min: 0},
-            telmob: {type: Number, min: 0},
+            telfixe: String,
+            telmob: String,
             email: String,
             skype: String,
             emploi: String,
@@ -86,8 +84,8 @@ var dossierSchema = new mongoose.Schema({
         },
 
         contact: {
-            telfixe: {type: Number, min: 0},
-            telmob: {type: Number, min: 0},
+            telfixe: String,
+            telmob: String,
             email: String,
             skype: String,
             emploi: String,
@@ -95,8 +93,51 @@ var dossierSchema = new mongoose.Schema({
         },
 
     },
+    cursus: {
 
-});
+        last: {
+            year: String,
+            precisez: String,
+            school: String,
+            adresse: {
+                address: String,
+                compl_adresse: String,
+                pays: String,
+                ville: String,
+                code_postal: Number,
+            },
+            class: String,
+            speciality: String,
+            level: String,
+            other: String,
+        },
+
+            previous: {
+                year: String,
+                precisez: String,
+                adresse: {
+                    address: String,
+                    compl_adresse: String,
+                    pays: String,
+                    ville: String,
+                    code_postal: Number,
+                },
+                class: String,
+                speciality: String,
+                level: String,
+                other: String,
+            },
+
+        },
+    wish:{
+        year: String,
+        cursus: String,
+        precisez: String,
+        campus : String,
+        message : String
+    },
+
+    });
 
 
 var Dossier = mongoose.model('Dossier', dossierSchema);

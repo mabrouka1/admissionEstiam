@@ -1,67 +1,89 @@
+<% var exist =  ( existingCandidacy != null &&  existingCandidacy.candidate != null ? true : false) %>
+
 <div class="panel panel-info">
     <div class="panel-heading">
         Coordonnées du tuteur
     </div>
     <div class="panel-body">
-        <form action="">
+        <form>
+            <input type="hidden" name="form" value="form_tutor">
             <div class="form-group col-md-4">
                 <label>Civilité:</label>
-                <select class="form-control">
-                    <option>Mr</option>
-                    <option>Mme</option>
-                    <option>Mlle</option>
+                <select name='civilite' class="form-control">
+                    <option <%= (exist && existingCandidacy.tutor.civilite == 'Mr' ? 'selected' :'')%> value="Mr">Mr</option>
+                    <option <%= (exist && existingCandidacy.tutor.civilite == 'MMe' ? 'selected' :'')%> value="MMe">Mme</option>
+                    <option <%= (exist && existingCandidacy.tutor.civilite == 'Mlle' ? 'selected' :'')%> value="Mlle">Mlle</option>
                 </select>
             </div>
             <div class="form-group col-md-4">
                 <label>Nom de Famille:</label>
-                <input data-validation="length custom" data-validation-regexp="^([a-zA-Z]+)$" data-validation-length="min2" type="text" class="form-control">
+                <input  value="<%= (exist && typeof existingCandidacy.tutor.nom != 'undefined'? existingCandidacy.tutor.nom :'')%>" name="nom" data-validation="length custom"
+                        data-validation="length custom"
+                        data-validation-regexp="^([a-zA-Z]+)$"
+                        data-validation-length="min2"  type="text" class="form-control">
             </div>
             <div class="form-group col-md-4">
                 <label>Prénom:</label>
-                <input data-validation="length custom" data-validation-regexp="^([a-zA-Z]+)$" data-validation-length="min2" type="text" class="form-control">
+                <input value="<%= (exist && typeof existingCandidacy.tutor.prenom != 'undefined'? existingCandidacy.tutor.prenom :'')%>" name="prenom" data-validation="length custom"
+                       data-validation="length custom"
+                       data-validation-regexp="^([a-zA-Z]+)$" data-validation-length="min2" type="text" class="form-control">
             </div>
             <div class="form-group col-md-6">
                 <label>Adresse :</label>
-                <textarea data-validation="alphanumeric"  data-validation-allowing="-_'àèé" class="form-control"></textarea>
+                <textarea name="address"
+                          data-validation="length custom" data-validation-regexp="^([a-zA-Z\s\S]+)$"
+                          data-validation-length="min2" class="form-control"><%= (exist && typeof existingCandidacy.tutor.adresse.address != 'undefined'? existingCandidacy.tutor.adresse.address :'')%></textarea>
             </div>
             <div class="form-group col-md-6">
                 <label>Complément adresse :</label>
-                <textarea data-validation="alphanumeric"  data-validation-allowing="-_'àèé" class="form-control"></textarea>
+                <textarea name="compl_adresse"
+                          data-validation="length custom" data-validation-regexp="^([a-zA-Z\s\S]+)$"
+                          data-validation-length="min2" class="form-control"><%= (exist && typeof existingCandidacy.tutor.adresse.compl_adresse != 'undefined'? existingCandidacy.tutor.adresse.compl_adresse :'')%></textarea>
             </div>
 
             <div class="form-group col-md-6">
                 <label>Pays :</label>
-                <input data-validation="alphanumeric"  data-validation-allowing="-_'àèé" type="text" class="form-control country">
+                <input value= "<%= (exist && typeof existingCandidacy.tutor.adresse.pays != 'undefined'? existingCandidacy.tutor.adresse.pays :'')%>" name="pays" data-validation="length custom"
+                       data-validation-regexp="^([a-zA-Z\s\S]+)$"
+                       data-validation-length="min2" type="text" class="form-control country">
             </div>
             <div class="form-group col-md-4">
                 <label>Ville :</label>
-                <input data-validation="alphanumeric"  data-validation-allowing="-_'àèé" type="text" class="form-control">
+                <input value= "<%= (exist && typeof existingCandidacy.tutor.adresse.ville != 'undefined'? existingCandidacy.tutor.adresse.ville :'')%>" name="ville" data-validation="length custom"
+                       data-validation-regexp="^([a-zA-Z\s\S]+)$"
+                       data-validation-length="min2" type="text" class="form-control">
             </div>
             <div class="form-group col-md-2">
                 <label>Code Postal :</label>
-                <input data-validation="number"  type="text" class="form-control">
+                <input value= "<%= (exist && typeof existingCandidacy.tutor.adresse.code_postal!= 'undefined'? existingCandidacy.tutor.adresse.code_postal :'')%>" name="code_postal"
+                       data-validation="number" type="text" class="form-control">
             </div>
             <div class="form-group col-md-3">
                 <label>Telephone Fixe:</label>
-                <input data-validation-regexp="^\+?[0-9]{6-15}$" type="text" class="form-control">
+                <input  value="<%= (exist && typeof existingCandidacy.tutor.contact.telfixe != 'undefined'? existingCandidacy.tutor.contact.telfixe :'')%>" name="telfixe" data-validation="custom"
+                        data-validation-regexp="^\+?[0-9]{6,15}$" type="text"
+                        class="form-control">
             </div>
             <div class="form-group col-md-3">
                 <label>Telephone Mobile :</label>
-                <input data-validation-regexp="^\+?[0-9]{6-15}$" type="text" class="form-control">
+                <input value="<%= (exist && typeof existingCandidacy.tutor.contact.telmob != 'undefined'? existingCandidacy.tutor.contact.telmob :'')%>" name="telmob" data-validation="custom"
+                       data-validation-regexp="^\+?[0-9]{6,15}$" type="text"class="form-control">
             </div>
             <div class="form-group col-md-6">
                 <label>Email :</label>
-                <input data-validation="email" type="email" class="form-control">
+                <input  value="<%= (exist && typeof existingCandidacy.tutor.contact.email != 'undefined'? existingCandidacy.tutor.contact.email :'')%>" name="email" data-validation="email" type="email"
+                        class="form-control">
             </div>
             <div class="form-group col-md-6">
                 <label>Emploi :</label>
-                <input data-validation="alphanumeric"  data-validation-allowing="-_'àèé"  type="text" class="form-control">
+                <input  value="<%= (exist && typeof existingCandidacy.tutor.contact.emploi != 'undefined'? existingCandidacy.tutor.contact.emploi :'')%>" name="emploi" data-validation="custom"
+                        data-validation="length"   type="text" class="form-control">
             </div>
             <div class="form-group col-md-6">
                 <label>Employeur :</label>
-                <input data-validation="alphanumeric"  data-validation-allowing="-_'àèé"  type="email" class="form-control">
+                <input  value="<%= (exist && typeof existingCandidacy.tutor.contact.employeur != 'undefined'? existingCandidacy.tutor.contact.employeur :'')%>" name="employeur" data-validation="custom"
+                        data-validation="length"  type="text" class="form-control">
             </div>
-
 
 
         </form>
