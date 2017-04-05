@@ -43,13 +43,6 @@ $(function () {
         //handleNext(step);
     });
 
-    $(".btn-file").click(function (e) {
-        e.preventDefault();
-        var elem = $(this).data("input");
-        $("#" + elem).click();
-        return false;
-    });
-
     $("div.drop-zone").dropzone(
         {
             url: "/users/candidacy/upload",
