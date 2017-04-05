@@ -1,18 +1,19 @@
-<% var exist =  ( existingCandidacy != null &&  existingCandidacy.wish != null ? true : false) %>
+<% var exist =  ( existingCandidacy != null && existingCandidacy.wish != null ? true : false) %>
 <form>
-<div class="panel panel-info">
-    <div class="panel-heading">
-        Voeux
-    </div>
-    <div class="panel-body">
-        <input type="hidden" name="form" value="form_wish">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            Voeux
+        </div>
+        <div class="panel-body">
+            <input type="hidden" name="form" value="form_wish">
 
 
             <div class="form-group col-md-6">
                 <label>Je demande mon admission en classe:</label>
                 <select name="year" class="form-control">
                     <option <%= (exist && existingCandidacy.wish.year == '1ère année en formation initiale (admission post-Bac)' ? 'selected' : '') %>
-                            value="1ère année en formation initiale (admission post-Bac)">1ère année en formation initiale (admission post-Bac)
+                            value="1ère année en formation initiale (admission post-Bac)">1ère année en formation
+                        initiale (admission post-Bac)
                     </option>
                     <option <%= (exist && existingCandidacy.wish.year == '2ème année en formation initiale' ? 'selected' : '') %>
                             value="2ème année en formation initiale">2ème année en formation initiale
@@ -21,13 +22,15 @@
                             value="3ème année en formation initiale">3ème année en formation initiale
                     </option>
                     <option <%= (exist && existingCandidacy.wish.year == '4ème année (en alternance, contrat de professionnalisation)' ? 'selected' : '') %>
-                            value="4ème année (en alternance, contrat de professionnalisation)">4ème année (en alternance, contrat de professionnalisation
+                            value="4ème année (en alternance, contrat de professionnalisation)">4ème année (en
+                        alternance, contrat de professionnalisation
                     </option>
                     <option <%= (exist && existingCandidacy.wish.year == '4ème année en formation initiale' ? 'selected' : '') %>
                             value="4ème année en formation initiale">4ème année en formation initiale
                     </option>
                     <option <%= (exist && existingCandidacy.wish.year == '5ème année (en alternance, contrat de professionnalisation)' ? 'selected' : '') %>
-                            value="5ème année (en alternance, contrat de professionnalisation)">5ème année (en alternance, contrat de professionnalisation
+                            value="5ème année (en alternance, contrat de professionnalisation)">5ème année (en
+                        alternance, contrat de professionnalisation
                     </option>
                     <option <%= (exist && existingCandidacy.wish.year == '5ème année en formation initiale' ? 'selected' : '') %>
                             value="5ème année en formation initiale">5ème année en formation initiale
@@ -43,51 +46,54 @@
                 <div class="radio">
                     <label class="radio">
 
-                        <input type="radio" name="cursus"  <%= (exist && existingCandidacy.wish.cursus == 'DigitalMédias' ? 'checked="checked"' : '') %>
-                                value="DigitalMédias">Cursus ÉSTIAM Digital Médias (Bac+4 et Bac+5)
+                        <input type="radio"
+                               name="cursus" <%= (exist && existingCandidacy.wish.cursus == 'DigitalMédias' ? 'checked="checked"' : '') %>
+                               value="DigitalMédias">Cursus ÉSTIAM Digital Médias (Bac+4 et Bac+5)
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="cursus" <%= (exist && existingCandidacy.wish.cursus == 'Finance' ? 'checked="checked"' : '') %>
+                        <input type="radio"
+                               name="cursus" <%= (exist && existingCandidacy.wish.cursus == 'Finance' ? 'checked="checked"' : '') %>
                                value="Finance">Cursus ÉSTIAM Finance (Bac+4 et Bac+5)
                     </label>
                     <label class="radio">
-                        <input type="radio" name="cursus" <%= (exist && existingCandidacy.wish.cursus == 'EnterpriseMM' ? 'checked="checked"' : '') %>
+                        <input type="radio"
+                               name="cursus" <%= (exist && existingCandidacy.wish.cursus == 'EnterpriseMM' ? 'checked="checked"' : '') %>
                                value="EnterpriseMM">Cursus ÉSTIAM Enterprise Mobile Management (Bac+4 et Bac+5)
                     </label>
                 </div>
             </div>
             <div class="form-group col-md-6">
                 <label>Si autre,Précisez :</label>
-                <input value="<%= (exist && typeof existingCandidacy.wish.precisez!= 'undefined' ? existingCandidacy.wish.precisez : '') %>"
+                <input value="<%= (exist && typeof existingCandidacy.wish.precisez != 'undefined' ? existingCandidacy.wish.precisez : '') %>"
                        name="precisez"
-                       data-validation="length" data-validation-length="min1" type="text" class="form-control" >
+                       data-validation="length" data-validation-length="min1" type="text" class="form-control">
 
             </div>
             <div class="form-group col-md-6">
                 <label>Campus souhaité :</label>
-                <div class="radio" >
+                <div class="radio">
                     <label class="radio">
-                        <input type="radio" name="campus"<%= (exist && existingCandidacy.wish.campus == 'Paris' ? 'checked ="checked"' : '') %>
-                         value="Paris">Paris
+                        <input type="radio"
+                               name="campus"<%= (exist && existingCandidacy.wish.campus == 'Paris' ? 'checked="checked"' : '') %>
+                               value="Paris">Paris
 
                     </label>
                     <label class="radio">
-                        <input type="radio" name="campus"<%= (exist && existingCandidacy.wish.campus == 'Lille' ? 'checked="checked"' : '') %>
-                               value="lille">Lille
+                        <input type="radio"
+                               name="campus"<%= (exist && existingCandidacy.wish.campus == 'Lille' ? 'checked="checked"' : '') %>
+                               value="Lille">Lille
                     </label>
                 </div>
             </div>
             <div class="form-group col-md-12">
                 <label>Pourquoi choisir Estiam:</label>
-                <textarea value="<%= (exist && typeof existingCandidacy.wish.message!= 'undefined' ? existingCandidacy.wish.message : '') %>"
-                          data-validation="length custom" data-validation-regexp="^([a-zA-Z\s\S]+)$"
-                          data-validation-length="min2" class="form-control" name="message">
-
-                </textarea>
+                <textarea data-validation="length custom" data-validation-regexp="^([a-zA-Z\s\S]+)$"
+                          data-validation-length="min2" class="form-control"
+                          name="message"><%= (exist && typeof existingCandidacy.wish.message != 'undefined' ? existingCandidacy.wish.message : '') %></textarea>
             </div>
 
-    </div>
+        </div>
 
-</div>
+    </div>
 </form>

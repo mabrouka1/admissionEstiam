@@ -72,41 +72,41 @@
 
             <div class="form-group col-md-6">
                 <label>Pays :</label>
-                <input value="<%= (exist && typeof existingCandidacy.candidate.pays != 'undefined' ? existingCandidacy.candidate.adresse.pays :'')%>" name="pays" data-validation="length custom"
+                <input value="<%= (exist && typeof existingCandidacy.candidate.adresse.pays != 'undefined' ? existingCandidacy.candidate.adresse.pays :'')%>" name="pays" data-validation="length custom"
                        data-validation-regexp="^([a-zA-Z\s\S]+)$"
                        data-validation-length="min2" type="text" class="form-control country">
             </div>
             <div class="form-group col-md-4">
                 <label>Ville :</label>
-                <input value="<%= (exist && typeof existingCandidacy.candidate.ville != 'undefined' ? existingCandidacy.candidate.adresse.ville :'')%>" name="ville" data-validation="length custom"
+                <input value="<%= (exist && typeof existingCandidacy.candidate.adresse.ville != 'undefined' ? existingCandidacy.candidate.adresse.ville :'')%>" name="ville" data-validation="length custom"
                        data-validation-regexp="^([a-zA-Z\s\S]+)$"
                        data-validation-length="min2" type="text" class="form-control">
             </div>
             <div class="form-group col-md-2">
                 <label>Code Postal :</label>
-                <input value="<%= (exist && typeof existingCandidacy.candidate.code_postal != 'undefined' ? existingCandidacy.candidate.adresse.code_postal :'')%>" name="code_postal" data-validation="number"
+                <input value="<%= (exist && typeof existingCandidacy.candidate.adresse.code_postal != 'undefined' ? existingCandidacy.candidate.adresse.code_postal :'')%>" name="code_postal" data-validation="number"
                        type="text" class="form-control">
             </div>
             <div class="form-group col-md-3">
                 <label>Telephone Fixe:</label>
-                <input value="<%= (exist && typeof existingCandidacy.candidate.telfixe != 'undefined' ? existingCandidacy.candidate.contact.telfixe :'')%>" name="telfixe" data-validation="custom"
+                <input value="<%= (exist && typeof existingCandidacy.candidate.contact.telfixe != 'undefined' ? existingCandidacy.candidate.contact.telfixe :'')%>" name="telfixe" data-validation="custom"
                        data-validation-regexp="^\+?[0-9]{6,15}$" type="text"
                        class="form-control">
             </div>
             <div class="form-group col-md-3">
                 <label>Telephone Mobile :</label>
-                <input value="<%= (exist && typeof existingCandidacy.candidate.telmob != 'undefined' ? existingCandidacy.candidate.contact.telmob :'')%>" name="telmob" data-validation="custom"
+                <input value="<%= (exist && typeof existingCandidacy.candidate.contact.telmob != 'undefined' ? existingCandidacy.candidate.contact.telmob :'')%>" name="telmob" data-validation="custom"
                        data-validation-regexp="^\+?[0-9]{6,15}$" type="text"
                        class="form-control">
             </div>
             <div class="form-group col-md-3">
                 <label>Email :</label>
-                <input value="<%= (exist && typeof existingCandidacy.candidate.email != 'undefined' ? existingCandidacy.candidate.contact.email :'')%>" name="email" data-validation="email" type="email"
+                <input value="<%= (exist && typeof existingCandidacy.candidate.contact.email != 'undefined' ? existingCandidacy.candidate.contact.email :'')%>" name="email" data-validation="email" type="email"
                        class="form-control">
             </div>
             <div class="form-group col-md-3">
                 <label>Skype :</label>
-                <input value="<%= (exist && typeof existingCandidacy.candidate.skype != 'undefined' ? existingCandidacy.candidate.contact.skype :'')%>" name="skype" data-validation="length custom"
+                <input value="<%= (exist && typeof existingCandidacy.candidate.contact.skype != 'undefined' ? existingCandidacy.candidate.contact.skype :'')%>" name="skype" data-validation="length custom"
                        data-validation-regexp="^([a-zA-Z0-9\S]+)$"
                        data-validation-length="min2" type="text" class="form-control">
             </div>

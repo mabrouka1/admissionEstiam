@@ -4,7 +4,7 @@
     <% include ../partials/head.ejs %>
 </head>
 
-<body>
+<body class="<%= (typeof bodyClass !== 'undefined' ? bodyClass : '' ) %>">
 
 <% include ../partials/header.ejs %>
 
@@ -27,7 +27,7 @@
     <% if(messages && messages.error) { %>
     <div class="alert alert-danger">
         <strong>Error!</strong>
-        <%=messages.error %>
+        <%= messages.error %>
 
     </div>
     <% } %>

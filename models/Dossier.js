@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 
 var dossierSchema = new mongoose.Schema({
     _id: String,
-
     candidate: {
         civilite: String,
         nom: String,
@@ -112,33 +111,52 @@ var dossierSchema = new mongoose.Schema({
             other: String,
         },
 
-            previous: {
-                year: String,
-                precisez: String,
-                school:String,
-                adresse: {
-                    address: String,
-                    compl_adresse: String,
-                    pays: String,
-                    ville: String,
-                    code_postal: Number,
-                },
-                class: String,
-                speciality: String,
-                level: String,
-                other: String,
+        previous: {
+            year: String,
+            precisez: String,
+            school: String,
+            adresse: {
+                address: String,
+                compl_adresse: String,
+                pays: String,
+                ville: String,
+                code_postal: Number,
             },
-
+            class: String,
+            speciality: String,
+            level: String,
+            other: String,
         },
-    wish:{
+
+    },
+    files: {
+        identity: {
+            document: String,
+            number: String,
+            date: Date,
+            file: String
+        },
+        sejour: {
+            number: String,
+            date: Date,
+            file: String
+        },
+        academy: {
+            last_report: String,
+            prev_report: String,
+            high_diploma: String,
+
+        }
+    },
+    wish: {
         year: String,
         cursus: String,
         precisez: String,
-        campus : String,
-        message : String
+        campus: String,
+        message: String
     },
 
-    });
+});
 
 
 var Dossier = mongoose.model('Dossier', dossierSchema);
