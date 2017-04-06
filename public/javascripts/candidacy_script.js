@@ -5,6 +5,7 @@ $(function () {
     $('.date').datetimepicker({timepicker: false, format: 'd-m-Y',});
     $(".country").countrySelect({preferredCountries: ['fr', 'gb', 'sn']});
     var wizard = $('.wizard').wizard({
+        enableWhenVisited: true,
         templates: {
             buttons: function () {
                 const options = this.options;
@@ -20,6 +21,7 @@ $(function () {
             back: 'Retour',
             finish: 'Terminer'
         },
+
         validator: function (step) {
             return true;
         },
@@ -41,6 +43,41 @@ $(function () {
         //handleNext(step);
     });
 
+    $("div.drop-zone").dropzone(
+        {
+            url: "/users/candidacy/upload",
+            uploadMultiple: false,
+            autoDiscover: false,
+            acceptedFiles: "image/jpeg,image/png,application/pdf",
+            init: function () {
+                var progress = $(this.element).data("input");
+                this.on("addedfile",
+                    function (file) {
+                        $(`.${progress}`).addClass("progress-bar-striped");
+                    }
+                );
+                this.on("success",
+                    function (message) {
+                        var resp = JSON.parse(message.xhr.response);
+                        var path = resp.message;
+                        $(`input[name='${progress}']`).val(path);
+                        $(`.${progress}`).removeClass("progress-bar-striped").addClass("progress-bar-success");
+                    }
+                );
+                this.on("error",
+                    function () {
+                        $(`.${progress}`).removeClass("progress-bar-striped").addClass("progress-bar-danger");
+                    }
+                );
+                this.on("complete",
+                    function (response) {
+                        console.log(response);
+                    }
+                );
+
+            }
+        }
+    );
     var handleSave = function (e) {
         var form = $(e).find('form');
         var title = $(e).data('title');
@@ -90,12 +127,13 @@ $(function () {
         }
     }
 
-});
+})
+;
 
 $.fn.extend({
-    serializeJSON: function(exclude) {
+    serializeJSON: function (exclude) {
         exclude || (exclude = []);
-        return this.serializeArray().reduce(function(hash, pair) {
+        return this.serializeArray().reduce(function (hash, pair) {
             pair.value && !(pair.name in exclude) && (hash[pair.name] = pair.value);
             return hash;
         }, {});

@@ -47,7 +47,7 @@ nev.configure({
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Admission Estiam - Bienvenue'});
+    res.render('index', {title: 'Admission Estiam - Bienvenue', bodyClass: 'bg-img'});
 });
 
 

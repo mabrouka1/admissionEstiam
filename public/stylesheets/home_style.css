@@ -3,6 +3,13 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+body.bg-img{
+  color:white;
+  background-color:white;
+  background-image:url(//www.estiam.com/wp-content/uploads/Dollarphotoclub_48888358-72dpi-NB.jpg);
+  background-size: cover ;
+}
+
 a {
   color: #00B7FF;
 }
@@ -81,8 +88,8 @@ a {
 }
 
 .modal-content {
-  background-color: #ececec;
-  border: 1px solid #bdc3c7;
+  background-color: #ffffff;
+  border: 1px solid #b3b3b3;
   border-radius: 0px;
   outline: 0;
 }
@@ -145,4 +152,208 @@ a {
 
 .navbar-brand img{
   height: 30px;
+}
+
+nav.navbar-inverse{
+  background-image: linear-gradient(to bottom,#002552 0,#002552 100%);
+}
+
+.home-body {
+  background-color: rgba(135, 135, 135, 0.5) ;
+}
+
+
+.section-button{
+  text-align: center;
+  background: #0c34b6;
+  padding-top: 5px;
+  transition: all 0.5s ease-in-out 0s;
+}
+.section-button > .section-button-header{
+  color:#fff;
+  background: #273238;
+  height: 190px;
+  position: relative;
+  transition: all 0.5s ease 0s;
+}
+.section-button > .section-button-header:after{
+  content: "";
+  border-bottom: 40px solid #0c34b6;
+  border-left: 263px solid transparent;
+  position: absolute;
+  right:0px;
+  bottom: 0px;
+}
+.section-button-header > .heading{
+  display: block;
+  padding: 20px 0;
+}
+.heading > h3{
+  margin: 0;
+  text-transform: uppercase;
+}
+.section-button-header > .price-value{
+  display: block;
+  font-size: 60px;
+  line-height: 60px;
+}
+.section-button-header > .price-value > .mo{
+  font-size: 14px;
+  display: block;
+  line-height: 0px;
+  text-transform: uppercase;
+}
+.section-button-header > .price-value > .currency{
+  font-size: 24px;
+  margin-right: 4px;
+  position: relative;
+  bottom:30px;
+}
+.section-button > .pricingContent{
+  text-transform: uppercase;
+  color:#fff
+}
+.section-button > .pricingContent > ul{
+  list-style: none;
+  padding: 0;
+}
+.section-button > .pricingContent > ul > li{
+  padding: 15px 0;
+  border-bottom: 1px solid #fff;
+}
+.section-button > .pricingContent > ul > li:last-child{
+  border: 0px none;
+}
+.section-button-sign-up{
+  padding: 30px 0;
+}
+.section-button-sign-up > .btn-block{
+  width: 80%;
+  margin: 0 auto;
+  background: #273238;
+  border:2px solid #fff;
+  color:#fff;
+  padding: 15px 12px;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+.section-button-sign-up > .btn-block:hover{
+  opacity: 0.9;
+}
+
+.blue{
+  background: #3498db;
+}
+.blue .section-button-header:after{
+  border-bottom-color: #3498db;
+}
+@media screen and (max-width: 1200px){
+  .section-button > .section-button-header:after{
+    border-left: 215px solid transparent;
+  }
+}
+@media screen and (max-width: 990px){
+  .section-button{
+    margin-bottom: 20px;
+  }
+  .section-button > .section-button-header:after{
+    border-left: 349px solid transparent;
+  }
+}
+@media screen and (max-width: 480px){
+  .section-button{
+    overflow: hidden;
+  }
+  .section-button > .section-button-header:after {
+    border-left: 459px solid rgba(0, 0, 0, 0);
+  }
+}
+
+.transparent{
+  background-color: transparent !important;
+}
+
+.panel-group a {
+  text-decoration: blink;
+}
+
+
+.footer-distributed{
+  background-color: #292c2f;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+  font: normal 16px sans-serif;
+
+  padding: 45px 50px;
+  margin-top: 80px;
+}
+
+.footer-distributed .footer-left p{
+  color:  #8f9296;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Footer links */
+
+.footer-distributed p.footer-links{
+  font-size:18px;
+  font-weight: bold;
+  color:  #ffffff;
+  margin: 0 0 10px;
+  padding: 0;
+}
+
+.footer-distributed p.footer-links a{
+  display:inline-block;
+  line-height: 1.8;
+  text-decoration: none;
+  color:  inherit;
+}
+
+.footer-distributed .footer-right{
+  float: right;
+  margin-top: 6px;
+  max-width: 180px;
+}
+
+.footer-distributed .footer-right a{
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  background-color:  #33383b;
+  border-radius: 2px;
+
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 35px;
+
+  margin-left: 3px;
+}
+
+/* If you don't want the footer to be responsive, remove these media queries */
+
+@media (max-width: 600px) {
+
+  .footer-distributed .footer-left,
+  .footer-distributed .footer-right{
+    text-align: center;
+  }
+
+  .footer-distributed .footer-right{
+    float: none;
+    margin: 0 auto 20px;
+  }
+
+  .footer-distributed .footer-left p.footer-links{
+    line-height: 1.8;
+  }
+}
+
+
+#div-login-msg span, #div-register-msg span, #div-lost-msg span{
+  color: #000;
 }

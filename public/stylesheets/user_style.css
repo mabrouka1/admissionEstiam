@@ -40,7 +40,7 @@ nav.sidebar, .main{
     /*Allow main to be next to Nav*/
     .main{
         position: absolute;
-        width: calc(100% - 40px); /*keeps 100% minus nav size*/
+        width: calc(100% - 200px); /*keeps 100% minus nav size*/
         margin-left: 20px;
         margin-right: 20px;
     }
@@ -125,11 +125,12 @@ nav.sidebar, .main{
 
 /* .....NavBar: Fully showing nav bar..... */
 
-@media (min-width: 1330px) {
+@media (min-width: 1430px) {
 
     /*Allow main to be next to Nav*/
     .main{
         width: calc(100% - 200px); /*keeps 100% minus nav size*/
+        margin-left: 120px;
     }
 
     /*Show all nav*/
@@ -183,4 +184,24 @@ li .badge{
 }
 .country-select{
     display: inherit !important;
+}
+
+nav.navbar-inverse{
+    background-image: linear-gradient(to bottom,#002552 0,#002552 100%);
+}
+
+.progress{
+    margin-bottom: 0;
+}
+
+.btn.btn-file{
+    width: 100%;
+}
+
+.dropzone .dz-preview .dz-image {
+    width: 80px;
+    height: 80px;
+}
+.dz-success-mark, .dz-error-mark{
+    display: none;
 }
