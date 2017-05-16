@@ -15,22 +15,48 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="<%= typeof dashboard!= 'undefined' ? dashboard : ''%>"><a href="/users">Dashboard<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
-                <li class="<%= typeof profile!= 'undefined' ? profile : ''%>"><a href="#">Profile<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
+                <li class="<%= typeof dashboard!= 'undefined' ? dashboard : ''%>">
+                    <a href="/users">Dashboard
+                        <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
+                <li class="<%= typeof profile!= 'undefined' ? profile : ''%>">
+                    <a href="#">Profile
+                        <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span>
+                    </a>
+                </li>
                 <li class="dropdown <%= typeof admission!= 'undefined' ? admission : ''%>">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admission <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-briefcase"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admission
+                        <span class="caret"></span>
+                        <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-briefcase"></span>
+                    </a>
                     <ul class="dropdown-menu forAnimate" role="menu">
-                        <li class="<%= typeof candidacy!= 'undefined' ? candidacy : ''%>"><a href="/users/candidacy">Mon dossier</a></li>
-                        <li><a href="#">Mon Inscription</a></li>
-                        <li><a href="#">Mon Alternance </a></li>
+                        <li class="<%= typeof candidacy!= 'undefined' ? candidacy : ''%>">
+                            <a href="/users/candidacy">Mon dossier</a>
+                        </li>
+                        <li>
+                            <a href="#">Mon Inscription</a>
+                        </li>
+                        <li>
+                            <a href="#">Mon Alternance </a>
+                        </li>
 
                         <li class="divider"></li>
                         <li><a href="#">Attestations</a></li>
 
                     </ul>
                 </li>
-                <li class="<%=messages%>"><a href="#">Messages<span class="badge pull-right">5</span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-envelope"></span></a></li>
-                <li class="signout"><a href="/signout">Déconnexion<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-off"></span></a></li>
+                <li class="<%=messages%>">
+                    <a href="/users/messages">Messages
+                        <span class="badge pull-right">5</span>
+                        <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-envelope"></span>
+                    </a>
+                </li>
+                <li class="signout">
+                    <a href="/signout">Déconnexion
+                        <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-off"></span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

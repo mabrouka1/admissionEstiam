@@ -1,0 +1,201 @@
+<link href="/stylesheets/bootstrap-extend.min.css" rel="stylesheet">
+<link href="/stylesheets/site.min.css" rel="stylesheet">
+<style>
+    body{
+        padding-top: 0;
+    }
+    .btn-default:focus, .btn-default:hover{
+        background-position: inherit;
+    }
+
+
+    .page-aside+.page-main {
+        margin-left: 280px;
+    }
+    .page-aside{width: 280px;}
+    .list-group-item.active .avatar, .list-group-item.active .media-heading {
+        color: #ffffff;
+    }
+    .app-message-chats{
+        height: 400px;
+    }
+    .message-box{
+        border: 2px #62a8ea solid;
+    }
+
+    .app-message-chats::-webkit-scrollbar-track
+    {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+        background-color: #F5F5F5;
+    }
+
+    .app-message-chats::-webkit-scrollbar
+    {
+        width: 12px;
+        background-color: #F5F5F5;
+    }
+
+    .app-message-chats::-webkit-scrollbar-thumb
+    {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #337ab7 ;
+    }
+
+</style>
+<% layout('../layouts/user') %>
+<h1><%= title %></h1>
+<div class="margin-60"></div>
+<div class="col-md-12">
+    <div class="message-box">
+        <!-- Message Sidebar -->
+        <div class="page-aside">
+            <div class="page-aside-inner">
+                <div class="app-message-list scrollable is-enabled scrollable-vertical" data-plugin="pageAsideScroll" >
+                    <div data-role="container" class="scrollable-container" >
+                        <div data-role="content" class="scrollable-content" >
+                            <ul class="list-group">
+                                <li class="list-group-item active">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <a class="avatar avatar-online" href="javascript:void(0)">
+                                                ESTM
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">ESTIAM</h4>
+                                            <span class="media-time">15 sec ago</span>
+                                        </div>
+                                        <div class="media-right">
+                                            <span class="badge badge-danger">3</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="scrollable-bar scrollable-bar-vertical scrollable-bar-hide" draggable="false">
+                        <div class="scrollable-bar-handle" style="height: 278.28px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  End Message Sidebar -->
+        <div class="page-main">
+            <!-- Chat Box -->
+            <div class="app-message-chats">
+                <div class="chats">
+                    <div class="chat">
+                        <div class="chat-avatar">
+                            <a class="avatar" data-toggle="tooltip" href="#" data-placement="right" title="" data-original-title="">
+                                NM
+
+                            </a>
+                        </div>
+                        <div class="chat-body">
+                            <div class="chat-content">
+                                <p>
+                                    Hello. What can I do for you?
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat chat-left">
+                        <div class="chat-avatar">
+                            <a class="avatar" data-toggle="tooltip" href="#" data-placement="left" title="" data-original-title="">
+                                NM
+
+                            </a>
+                        </div>
+                        <div class="chat-body">
+                            <div class="chat-content">
+                                <p>
+                                    I'm just looking around.
+                                </p>
+                                <p>Will you tell me something about yourself? </p>
+
+                            </div>
+                            <div class="chat-content">
+                                <p>
+                                    Are you there? That time!
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat">
+                        <div class="chat-avatar">
+                            <a class="avatar" data-toggle="tooltip" href="#" data-placement="right" title="" data-original-title="">
+                                NM
+
+                            </a>
+                        </div>
+                        <div class="chat-body">
+                            <div class="chat-content">
+                                <p>
+                                    Where?
+                                </p>
+
+                            </div>
+                            <div class="chat-content">
+                                <p>
+                                    OK, my name is Limingqiang. I like singing, playing basketballand so on.
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <p class="time">1 hours ago</p>
+                    <div class="chat chat-left">
+                        <div class="chat-avatar">
+                            <a class="avatar" data-toggle="tooltip" href="#" data-placement="left" title="" data-original-title="">
+                                NM
+
+                            </a>
+                        </div>
+                        <div class="chat-body">
+                            <div class="chat-content">
+                                <p>You wait for notice.</p>
+                            </div>
+                            <div class="chat-content">
+                                <p>Consectetuorem ipsum dolor sit?</p>
+
+                            </div>
+                            <div class="chat-content">
+                                <p>OK?</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat">
+                        <div class="chat-avatar">
+                            <a class="avatar" data-toggle="tooltip" href="#" data-placement="right" title="" data-original-title="">
+                                NM
+
+                            </a>
+                        </div>
+                        <div class="chat-body">
+                            <div class="chat-content">
+                                <p>OK!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- End Chat Box -->
+
+            <!-- Message Input-->
+            <form class="app-message-input">
+                <div class="message-input">
+                    <textarea class="form-control" rows="1" style="overflow: hidden; word-wrap: break-word; height: 36px;"></textarea>
+                </div>
+                <button class="message-input-btn btn btn-primary" type="button">SEND</button>
+            </form>
+            <!-- End Message Input-->
+
+        </div>
+    </div>
+</div>

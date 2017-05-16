@@ -1,3 +1,4 @@
+<% var exist =  ( existingCandidacy != null && existingCandidacy.files != null ? true : false) %>
 <form>
     <div class="panel panel-info">
         <div class="panel-heading">
@@ -7,102 +8,165 @@
     </div>
     <div class="panel-body">
         <input type="hidden" name="form" value="form_files">
-        <div class="form-group col-md-3">
-            <label>Pièce d'Identité:</label>
-            <select name="cni_type" class="form-control">
-                <option value="passport">PASSPORT</option>
-                <option value="cni">CNI</option>
+        <div class="col-md-4">
+            <div class="form-group col-md-12">
+                <label>Pièce d'Identité:</label>
+                <select name="cni_type" class="form-control">
+                    <option <%= (exist && existingCandidacy.files.identity.document == 'passport' ? 'selected' : '') %>
+                            value="passport">PASSPORT
+                    </option>
+                    <option <%= (exist && existingCandidacy.files.identity.document == 'cni' ? 'selected' : '') %>
+                            value="cni">CNI
+                    </option>
 
-            </select>
-        </div>
+                </select>
+            </div>
+            <div class="form-group col-md-12">
+                <label>Numéro de la pièce d'identité:</label>
+                <input  value="<%= (exist && typeof existingCandidacy.files.identity.number != 'undefined' ? existingCandidacy.files.identity.number : '') %>"
+                       name="cni_number" type="text"
+                        data-validation="length"
+                        data-validation-length="min5"
+                        class="form-control">
+            </div>
+            <div class="form-group col-md-12">
+                <label>Date d'expiration :</label>
+                <input value="<%= (exist && typeof existingCandidacy.files.identity.date != 'undefined' ? moment(existingCandidacy.files.identity.date).format('DD-MM-YYYY') : '') %>"
+                       data-validation="date"
+                       data-validation-format="dd-mm-yyyy"
+                       name="cni_date" type="text" class="form-control date">
+            </div>
+            <div class="form-group col-md-12">
 
-        <div class="form-group col-md-3">
-            <label>Numéro de la pièce d'identité:</label>
-            <input name="cni_number" type="text" class="form-control">
-        </div>
-        <div class="form-group col-md-3">
-            <label>Date d'expiration :</label>
-            <input name="cni_date" type="text" class="form-control date">
-        </div>
-        <div class="form-group col-md-3">
-
-            <label for="">Votre pièce d'Identité</label>
-            <div class="btn btn-default btn-file drop-zone" data-input="file_cni">
-                <div class="progress">
-                    <div class="progress-bar active file_cni" role="progressbar"
-                         aria-valuenow="99" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                <label for="">Votre pièce d'Identité</label>
+                <div class="btn btn-default btn-file drop-zone" data-input="file_cni">
+                    <div class="progress">
+                        <div class="progress-bar active file_cni" role="progressbar"
+                             aria-valuenow="99" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                        </div>
+                    </div>
+                    choisir le fichier
+                    <input value="<%= (exist && typeof existingCandidacy.files.identity.file != 'undefined' ? JSON.stringify(existingCandidacy.files.identity.file) : '') %>" type="hidden" name="file_cni"/>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="alert alert-info" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <div class="file-info file_cni">
+                        <%= (exist && typeof existingCandidacy.files.identity.file.originalname != 'undefined' ? existingCandidacy.files.identity.file.originalname : 'Aucun Fichier Enregisté !') %>
                     </div>
                 </div>
-                choisir le fichier
-                <input type="hidden" name="file_cni"/>
             </div>
         </div>
-        <div class="form-group col-md-5">
-            <label>Titre de séjour : numéro du titre de séjour:</label>
-            <input name="sjr_number" type="text" class="form-control">
-        </div>
-        <div class="form-group col-md-4">
-            <label>Date d'expiration :</label>
-            <input name="sjr_date" type="text" class="form-control date">
-        </div>
-        <div class="form-group col-md-3">
+        <div class="col-md-4">
+            <div class="form-group col-md-12">
+                <label>Titre de séjour : numéro du titre de séjour:</label>
+                <input value="<%= (exist && typeof existingCandidacy.files.sejour.number != 'undefined' ? existingCandidacy.files.identity.number : '') %>"
+                       name="sjr_number"
+                       data-validation="length"
+                       data-validation-length="min5"
+                       type="text" class="form-control">
+            </div>
+            <div class="form-group col-md-12">
+                <label>Date d'expiration :</label>
+                <input value="<%= (exist && typeof existingCandidacy.files.identity.date != 'undefined' ? moment(existingCandidacy.files.sejour.date).format('DD-MM-YYYY') : '') %>"
+                       data-validation="date"
+                       data-validation-format="dd-mm-yyyy"
+                       name="sjr_date" type="text" class="form-control date">
+            </div>
+            <div class="form-group col-md-12">
 
-            <label>Votre Carte de Séjour</label>
+                <label>Votre Carte de Séjour</label>
 
-            <div class="btn btn-default btn-file drop-zone" data-input="file_sjr">
-                <div class="progress">
-                    <div class="progress-bar active file_sjr" role="progressbar"
-                         aria-valuenow="99" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                <div class="btn btn-default btn-file drop-zone" data-input="file_sjr">
+                    <div class="progress">
+                        <div class="progress-bar active file_sjr" role="progressbar"
+                             aria-valuenow="99" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                        </div>
+                    </div>
+                    choisir le fichier
+                    <input value="<%= (exist && typeof existingCandidacy.files.sejour.file != 'undefined' ? JSON.stringify(existingCandidacy.files.sejour.file) : '') %>" type="hidden" name="file_sjr"/>
+                </div>
+
+            </div>
+            <div class="col-md-12">
+                <div class="alert alert-info" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <div class="file-info file_sjr">
+                        <%= (exist && typeof existingCandidacy.files.sejour.file.originalname != 'undefined' ? existingCandidacy.files.sejour.file.originalname : 'Aucun Fichier Enregisté !') %>
                     </div>
                 </div>
-                choisir le fichier
-                <input type="hidden" name="file_sjr"/>
             </div>
-
         </div>
-        <div class="form-group col-md-4">
+        <div class="col-md-4">
+            <div class="form-group col-md-12">
 
-            <label>Dernier bulletin scolaire</label>
+                <label>Dernier bulletin scolaire</label>
 
-            <div class="btn btn-default btn-file drop-zone" data-input="file_blt_last">
-                <div class="progress">
-                    <div class="progress-bar active file_blt_last" role="progressbar"
-                         aria-valuenow="99" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                <div class="btn btn-default btn-file drop-zone" data-input="file_blt_last">
+                    <div class="progress">
+                        <div class="progress-bar active file_blt_last" role="progressbar"
+                             aria-valuenow="99" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                        </div>
+                    </div>
+                    choisir le fichier
+                    <input value="<%= (exist && typeof existingCandidacy.files.academy.last_report != 'undefined' ? JSON.stringify(existingCandidacy.files.academy.last_report) : '') %>" type="hidden" name="file_blt_last"/>
+                </div>
+
+            </div>
+            <div class="col-md-12">
+                <div class="alert alert-info" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <div class="file-info file_blt_last">
+                        <%= (exist && typeof existingCandidacy.files.academy.last_report != 'undefined' ? existingCandidacy.files.academy.last_report.originalname : 'Aucun Fichier Enregisté !') %>
                     </div>
                 </div>
-                choisir le fichier
-                <input type="hidden" name="file_blt_last"/>
             </div>
+            <div class="form-group col-md-12">
+                <label>Bulletin scolaire précédent</label>
 
-        </div>
-        <div class="form-group col-md-4">
-            <label>Bulletin scolaire précédent</label>
+                <div class="btn btn-default btn-file drop-zone" data-input="file_blt_prev">
+                    <div class="progress">
+                        <div class="progress-bar active file_blt_prev" role="progressbar"
+                             aria-valuenow="99" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                        </div>
+                    </div>
+                    choisir le fichier
+                    <input value=" <%= (exist && typeof existingCandidacy.files.academy.prev_report != 'undefined' ? JSON.stringify(existingCandidacy.files.academy.prev_report) : '') %>" type="hidden" name="file_blt_prev"/>
+                </div>
 
-            <div class="btn btn-default btn-file drop-zone" data-input="file_blt_prev">
-                <div class="progress">
-                    <div class="progress-bar active file_blt_prev" role="progressbar"
-                         aria-valuenow="99" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+            </div>
+            <div class="col-md-12">
+                <div class="alert alert-info" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <div class="file-info file_blt_prev">
+                        <%= (exist && typeof existingCandidacy.files.academy.prev_report != 'undefined' ? existingCandidacy.files.academy.prev_report.originalname : 'Aucun Fichier Enregisté !') %>
                     </div>
                 </div>
-                choisir le fichier
-                <input type="hidden" name="file_blt_prev"/>
             </div>
+            <div class="form-group col-md-12">
 
-        </div>
-        <div class="form-group col-md-4">
+                <label>Diplôme le plus élevé</label>
 
-            <label>Diplôme le plus élevé</label>
+                <div class="btn btn-default btn-file drop-zone" data-input="file_dlp">
+                    <div class="progress">
+                        <div class="progress-bar active file_dlp" role="progressbar"
+                             aria-valuenow="99" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                        </div>
+                    </div>
+                    choisir le fichier
+                    <input value="<%= (exist && typeof existingCandidacy.files.academy.high_diploma != 'undefined' ? JSON.stringify(existingCandidacy.files.academy.high_diploma) : '') %>" type="hidden" name="file_dlp"/>
+                </div>
 
-            <div class="btn btn-default btn-file drop-zone" data-input="file_dlp">
-                <div class="progress">
-                    <div class="progress-bar active file_dlp" role="progressbar"
-                         aria-valuenow="99" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+            </div>
+            <div class="col-md-12">
+                <div class="alert alert-info" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <div class="file-info file_dlp">
+                        <%= (exist && typeof existingCandidacy.files.academy.high_diploma != 'undefined' ? existingCandidacy.files.academy.high_diploma.originalname : 'Aucun Fichier Enregisté !') %>
                     </div>
                 </div>
-                choisir le fichier
-                <input type="hidden" name="file_dlp"/>
             </div>
-
         </div>
     </div>
 </form>
