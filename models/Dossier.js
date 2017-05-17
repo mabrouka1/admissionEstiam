@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var keystone = require('keystone');
 
 var dossierSchema = new mongoose.Schema({
     _id: String,
@@ -165,4 +166,8 @@ var dossierSchema = new mongoose.Schema({
 
 var Dossier = mongoose.model('Dossier', dossierSchema);
 
+var dossierList = new keystone.List('Dossier');
+
+dossierList.add({});
+dossierList.register();
 module.exports = Dossier;
