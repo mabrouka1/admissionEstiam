@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var keystone = require('keystone');
 
 var dossierSchema = new mongoose.Schema({
     _id: String,
@@ -134,17 +135,17 @@ var dossierSchema = new mongoose.Schema({
             document: String,
             number: String,
             date: Date,
-            file: String
+            file: Object
         },
         sejour: {
             number: String,
             date: Date,
-            file: String
+            file: Object
         },
         academy: {
-            last_report: String,
-            prev_report: String,
-            high_diploma: String,
+            last_report: Object,
+            prev_report: Object,
+            high_diploma: Object,
 
         }
     },
@@ -155,10 +156,18 @@ var dossierSchema = new mongoose.Schema({
         campus: String,
         message: String
     },
+    status: {
+        type: String,
+        default: 'created'
+    }
 
 });
 
 
 var Dossier = mongoose.model('Dossier', dossierSchema);
 
+var dossierList = new keystone.List('Dossier');
+
+dossierList.add({});
+dossierList.register();
 module.exports = Dossier;

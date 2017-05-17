@@ -19,14 +19,20 @@ $(function () {
         buttonLabels: {
             next: 'Suivant',
             back: 'Retour',
-            finish: 'Terminer'
+            finish: 'Soumettre'
         },
 
-        validator: function (step) {
-            return true;
+        onFinish: function () {
+            console.log(step);
+            return false;
+            //handleFinish(step)
         },
-        onNext: function (step) {
-            //handleNext(step)
+        onReady: function (e) {
+            var wizard = this, steps = wizard.steps;
+            $.each(steps, function (i, e) {
+                e.states.disabled = false;
+            });
+            $(".wizard-steps li.active").siblings().removeClass("disabled");
         }
     });
 
@@ -34,6 +40,21 @@ $(function () {
         lang: 'fr',
         modules: 'date, security'
     });
+
+    var annee_scolaire = new ConditionalField({
+        control: '.annee_scolaire',
+        visibility: {
+            'Autres': '.last_precisez',
+        }
+    });
+
+    var previous_school = new ConditionalField({
+        control: '[name="previous\[school\]"]',
+        visibility: {
+            'different': '.previous_school'
+        }
+    });
+
 
     $('.save-form').click(function (e) {
         e.preventDefault();
@@ -50,23 +71,34 @@ $(function () {
             autoDiscover: false,
             acceptedFiles: "image/jpeg,image/png,application/pdf",
             init: function () {
-                var progress = $(this.element).data("input");
+                var notify, progress = $(this.element).data("input");
                 this.on("addedfile",
                     function (file) {
-                        $(`.${progress}`).addClass("progress-bar-striped");
+                        $(`.${progress}.progress-bar`).addClass("progress-bar-striped");
+                        notify = $.notify(
+                            {
+                                icon: 'glyphicon glyphicon-exclamation-sign',
+                                message: '<strong>Envoie en cours</strong> Ne fermez pas cette page ...',
+                            }, {
+                                allow_dismiss: false
+                            }
+                        );
                     }
                 );
                 this.on("success",
                     function (message) {
                         var resp = JSON.parse(message.xhr.response);
-                        var path = resp.message;
-                        $(`input[name='${progress}']`).val(path);
-                        $(`.${progress}`).removeClass("progress-bar-striped").addClass("progress-bar-success");
+                        var file = resp.message;
+                        $(`input[name='${progress}']`).val(JSON.stringify(file));
+                        $(`.${progress}:not('.progress-bar') `).html(file.originalname);
+                        $(`.${progress}.progress-bar`).removeClass("progress-bar-striped").addClass("progress-bar-success");
+                        notify.update({type: 'success', message: '<strong>Envoie Réussie</strong> '});
                     }
                 );
                 this.on("error",
                     function () {
-                        $(`.${progress}`).removeClass("progress-bar-striped").addClass("progress-bar-danger");
+                        $(`.${progress}.progress-bar`).removeClass("progress-bar-striped").addClass("progress-bar-danger");
+                        notify.update({type: 'danger', message: '<strong>Echec de l\'Envoie </strong> Réessayer ...'});
                     }
                 );
                 this.on("complete",
@@ -85,12 +117,23 @@ $(function () {
         var isValid = form.isValid();
         if (isValid) {
             var data = $(form).serializeJSON();
+            var notify = $.notify(
+                {
+                    icon: 'glyphicon glyphicon-exclamation-sign',
+                    message: '<strong>Envoie en cours</strong> Ne fermez pas cette page ...',
+                },
+                {
+                    allow_dismiss: false,
+                    showProgressbar: true
+                });
             $.post('/users/candidacy', data)
                 .done(function (response) {
                     console.log(response);
+                    notify.update({type: 'success', message: '<strong>Envoie Réussie</strong>'});
                 })
                 .fail(function (response) {
                     console.log(response);
+                    notify.update({type: 'danger', message: '<strong>Echec de l\'Envoie </strong> Réessayer ...'});
                 });
         }
     };

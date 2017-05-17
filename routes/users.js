@@ -28,6 +28,7 @@ router.get('/', function (req, res, next) {
 /* GET users Home. */
 router.get('/candidacy', function (req, res, next) {
     Candidacy.findOne({_id: req.user._id}, function (err, existingCandidacy) {
+
         res.render('users/candidacy', {
             admission: 'active',
             candidacy: 'active',
@@ -44,7 +45,7 @@ router.post('/candidacy/upload', function (req, res, next) {
             res.json({message: err});
             return;
         }
-        res.json({message: req.file.path});
+        res.json({message: req.file});
     });
 });
 
@@ -205,17 +206,17 @@ router.post('/candidacy', function (req, res, next) {
                     document: data.cni_type || '',
                     number: data.cni_number || '',
                     date: moment(data.cni_date, "DD-MM-YYYY") || null,
-                    file: data.file_cni || '',
+                    file: JSON.parse(data.file_cni) || '',
                 },
                 sejour: {
                     number: data.sjr_number,
                     date: moment(data.sjr_date, "DD-MM-YYYY") || null,
-                    file: data.file_sjr || '',
+                    file: JSON.parse(data.file_sjr || '{}') ,
                 },
                 academy: {
-                    last_report: data.file_blt_last || '',
-                    prev_report: data.file_blt_prev || '',
-                    high_diploma: data.file_dlp || '',
+                    last_report: JSON.parse(data.file_blt_last || '{}') ,
+                    prev_report: JSON.parse(data.file_blt_prev || '{}') ,
+                    high_diploma: JSON.parse(data.file_dlp || '{}') ,
 
                 }
             };
@@ -231,7 +232,6 @@ router.post('/candidacy', function (req, res, next) {
             };
             break;
         default:
-            console.log(data);
             res.json({message: 'Invalid Form Type'});
             return;
             break;
@@ -243,6 +243,12 @@ router.post('/candidacy', function (req, res, next) {
         res.json({message: err});
     });
 
+});
+
+/* GET Message */
+
+router.get('/messages', function (req, res, next) {
+    res.render('users/messages', {dashboard: 'active', title: 'Messages Estiam - Espace Admission'});
 });
 
 function saveOrUpdateCandidateForm(id, candidacy) {

@@ -1,6 +1,141 @@
 <% layout('../layouts/user') %>
+<%
+var submited = existingCandidacy != null
+        && existingCandidacy.candidate != null
+        && typeof existingCandidacy.status !== 'undefined'
+        &&  existingCandidacy.status !== 'created';
+submited = false;
+%>
+
 <h1><%= title %></h1>
+
 <div class="col-md-12">
+    <% if (submited) { %>
+        <div class="row margin-top-40">
+            <div class="bs-wizard" style="border-bottom:0;">
+
+                <div class="col-xs-3 bs-wizard-step complete">
+                    <div class="text-center bs-wizard-stepnum">Envoyé</div>
+                    <div class="progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <a href="#" class="bs-wizard-dot"></a>
+                    <div class="bs-wizard-info text-center">Lorem ipsum dolor sit amet.</div>
+                </div>
+
+                <div class="col-xs-3 bs-wizard-step complete"><!-- complete -->
+                    <div class="text-center bs-wizard-stepnum">En Cours</div>
+                    <div class="progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <a href="#" class="bs-wizard-dot"></a>
+                    <div class="bs-wizard-info text-center">Nam mollis tristique erat vel tristique. Aliquam erat volutpat.
+                        Mauris et vestibulum nisi. Duis molestie nisl sed scelerisque vestibulum. Nam placerat tristique
+                        placerat
+                    </div>
+                </div>
+
+                <div class="col-xs-3 bs-wizard-step active"><!-- complete -->
+                    <div class="text-center bs-wizard-stepnum">Information Supplémentaire</div>
+                    <div class="progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <a href="#" class="bs-wizard-dot"></a>
+                    <div class="bs-wizard-info text-center">Integer semper dolor ac auctor rutrum. Duis porta ipsum vitae mi
+                        bibendum bibendum
+                    </div>
+                </div>
+
+                <div class="col-xs-3 bs-wizard-step disabled"><!-- active -->
+                    <div class="text-center bs-wizard-stepnum">Validé</div>
+                    <div class="progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <a href="#" class="bs-wizard-dot"></a>
+                    <div class="bs-wizard-info text-center"> Curabitur mollis magna at blandit vestibulum. Vestibulum ante
+                        ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row margin-top-40">
+            <p>
+                <a href="#" data-toggle="collapse" data-target=".agenda" class="btn btn-primary btn-block">
+                    <i class="glyphicon glyphicon-calendar"></i> Voir mon planning
+                </a>
+            </p>
+            <div class="spacer"></div>
+            <div class="agenda collapse">
+                <div class="table-responsive">
+                    <table class="table table-condensed table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Event</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- Single event in a single day -->
+                        <tr>
+                            <td class="agenda-date" class="active" rowspan="1">
+                                <div class="dayofmonth">26</div>
+                                <div class="dayofweek">Saturday</div>
+                                <div class="shortdate text-muted">July, 2014</div>
+                            </td>
+                            <td class="agenda-time">
+                                5:30 AM
+                            </td>
+                            <td class="agenda-events">
+                                <div class="agenda-event">
+                                    <i class="glyphicon glyphicon-repeat text-muted" title="Repeating event"></i>
+                                    Fishing
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Multiple events in a single day (note the rowspan) -->
+                        <tr>
+                            <td class="agenda-date" class="active" rowspan="3">
+                                <div class="dayofmonth">24</div>
+                                <div class="dayofweek">Thursday</div>
+                                <div class="shortdate text-muted">July, 2014</div>
+                            </td>
+                            <td class="agenda-time">
+                                8:00 - 9:00 AM
+                            </td>
+                            <td class="agenda-events">
+                                <div class="agenda-event">
+                                    Doctor's Appointment
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="agenda-time">
+                                10:15 AM - 12:00 PM
+                            </td>
+                            <td class="agenda-events">
+                                <div class="agenda-event">
+                                    Meeting with executives
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="agenda-time">
+                                7:00 - 9:00 PM
+                            </td>
+                            <td class="agenda-events">
+                                <div class="agenda-event">
+                                    Aria's dance recital
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    <% } else { %>
     <div class="row">
         <div class="col-sm-12  single">
             <div class="alert alert-info fade in">
@@ -22,7 +157,7 @@
         <div id="wizard" class="wizard">
             <ul class="wizard-steps" role="tablist">
                 <li class="active" role="tab">
-                  Informations
+                    Informations
                 </li>
                 <li role="tab">
                     Coordonnées du pére
@@ -45,13 +180,27 @@
                 </li>
             </ul>
             <div class="wizard-content">
-                <div data-title="info" class="wizard-pane active" role="tabpanel"><% include ../partials/users/form_infos.ejs %></div>
-                <div data-title="father" class="wizard-pane" role="tabpanel"> <% include ../partials/users/form_father.ejs %></div>
-                <div data-title="mother" class="wizard-pane" role="tabpanel"><% include ../partials/users/form_mother.ejs %></div>
-                <div data-title="tutor" class="wizard-pane" role="tabpanel"><% include ../partials/users/form_tutor.ejs %></div>
-                <div data-title="cursus" class="wizard-pane" role="tabpanel"><% include ../partials/users/form_cursus.ejs %></div>
-                <div data-title="files" class="wizard-pane" role="tabpanel"><% include ../partials/users/form_files.ejs %></div>
-                <div data-title="wish" class="wizard-pane" role="tabpanel"><% include ../partials/users/form_wish.ejs %></div>
+                <div data-title="info" class="wizard-pane active" role="tabpanel">
+                    <% include ../partials/users/form_infos.ejs %>
+                </div>
+                <div data-title="father" class="wizard-pane" role="tabpanel">
+                    <% include ../partials/users/form_father.ejs %>
+                </div>
+                <div data-title="mother" class="wizard-pane" role="tabpanel">
+                    <% include ../partials/users/form_mother.ejs %>
+                </div>
+                <div data-title="tutor" class="wizard-pane" role="tabpanel">
+                    <% include ../partials/users/form_tutor.ejs %>
+                </div>
+                <div data-title="cursus" class="wizard-pane" role="tabpanel">
+                    <% include ../partials/users/form_cursus.ejs %>
+                </div>
+                <div data-title="files" class="wizard-pane" role="tabpanel">
+                    <% include ../partials/users/form_files.ejs %>
+                </div>
+                <div data-title="wish" class="wizard-pane" role="tabpanel">
+                    <% include ../partials/users/form_wish.ejs %>
+                </div>
             </div>
             <div class="pagination pagination-lg pull-right">
                 <ul>
@@ -63,6 +212,7 @@
         </div>
 
     </div>
+    <% } %>
 </div>
 <script type="text/javascript" src="/javascripts/dropzone.js"></script>
 <script type="text/javascript" src="/javascripts/candidacy_script.js"></script>

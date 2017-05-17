@@ -14,7 +14,8 @@ var errorHandler = require('errorhandler');
 var flash = require('express-flash');
 var expressValidator = require('express-validator');
 var passport = require('passport');
-
+var body = require('body-parser');
+var keystone = require('keystone');
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -56,10 +57,40 @@ app.locals.moment = require('moment');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+
+
+/**
+ * Keystone config
+ */
+
+
+keystone.init({
+    'name': 'Espace Admin Estiam',
+    'brand': 'Espace Admin Estiam',
+    'session': false,
+    'updates': 'updates',
+    'auth': true,
+    'user model': 'Admin',
+    'auto update': true,
+    'cookie secret': process.env.SESSION_SECRET,
+});
+
+keystone.import('models');
+
+/**
+ * Keystone config
+ */
+
+
+
+
+
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressValidator());
 
@@ -78,7 +109,10 @@ app.use(passport.session());
 app.use(flash());
 app.use('/', index);
 app.use('/users',  passportConfig.isAuthenticated,users);
+app.use('/keystone', keystone.Admin.Server.createStaticRouter(keystone));
+app.use('/keystone', keystone.Admin.Server.createDynamicRouter(keystone));
 app.use('/node_modules', express.static('node_modules'));
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -97,5 +131,13 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+keystone.app = app;
+keystone.start();
+/**
+ * Keystone config
+ */
+
 
 module.exports = app;
