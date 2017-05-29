@@ -3,9 +3,7 @@ var mongoose = require('mongoose');
 var keystone = require('keystone');
 var Types = keystone.Field.Types;
 
-var Dossier = new keystone.List('Dossier'),
-    ContactParents = new keystone.List('ContactParents', {inherits: Contact});
-
+var Dossier = new keystone.List('Dossier');
 
 Dossier.add({
     candidate: {type: Types.Relationship, ref: 'Candidate',},
@@ -19,30 +17,6 @@ Dossier.add({
 });
 Dossier.schema.add({_id: String});
 
-
-
-
-
-
-ContactParents.add({
-    emploi: {type: String},
-    employeur: {type: String},
-})
-
-
-
-
-
-
-
-
-
-
 Dossier.register();
-
-
-ContactParents.register();
-
-
 
 module.exports = Dossier;
