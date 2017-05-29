@@ -2,34 +2,54 @@ var bcrypt = require('bcrypt-nodejs');
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 
-var userSchema = new mongoose.Schema({
-    username: { type: String, unique: true },
-    email: { type: String, unique: true },
-    password: String,
-    passwordResetToken: String,
-    passwordResetExpires: Date,
+var keystone = require('keystone');
+var Types = keystone.Field.Types;
 
-    profile: {
-        name: { type: String, default: '' },
-        gender: { type: String, default: '' },
-        location: { type: String, default: '' },
-        picture: { type: String, default: '' }
-    }
-}, { timestamps: true });
+var User = new keystone.List('User');
+var Profile = new keystone.List('Profile');
+
+
+User.add(
+    {
+        username: {type: String, required: true, initial: true, index: true, unique: true},
+        email: {type: Types.Email, initial: true, required: true, index: true, unique: true},
+        password: {type: Types.Password, initial: true, required: true},
+        passwordResetToken: {type: String, required: false},
+        passwordResetExpires: {type: Types.Date, required: false},
+        profile: { type: Types.Relationship, ref: 'Profile' , required: false},
+    });
+User.schema.add({},{timestamp: true});
+
+Profile.add({
+
+            name: {type: Types.Name},
+            gender: {type: String},
+            location: {type: Types.Location},
+            picture: {type: String}
+
+    });
+
+// Provide access to Keystone
+User.schema.virtual('canAccessKeystone').get(function () {
+    return false;
+});
+
+
+
 
 /**
  * Password hash middleware.
  */
-userSchema.pre('save', function(next) {
+User.schema.pre('save', function (next) {
     var user = this;
     if (!user.isModified('password')) {
         return next();
     }
-    bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.genSalt(10, function (err, salt) {
         if (err) {
             return next(err);
         }
-        bcrypt.hash(user.password, salt, null, function(err, hash) {
+        bcrypt.hash(user.password, salt, null, function (err, hash) {
             if (err) {
                 return next(err);
             }
@@ -42,8 +62,8 @@ userSchema.pre('save', function(next) {
 /**
  * Helper method for validating user's password.
  */
-userSchema.methods.comparePassword = function(candidatePassword, cb) {
-    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+User.schema.methods.comparePassword = function (candidatePassword, cb) {
+    bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
         cb(err, isMatch);
     });
 };
@@ -51,7 +71,7 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 /**
  * Helper method for getting user's gravatar.
  */
-userSchema.methods.gravatar = function(size) {
+User.schema.methods.gravatar = function (size) {
     if (!size) {
         size = 200;
     }
@@ -62,6 +82,12 @@ userSchema.methods.gravatar = function(size) {
     return 'https://gravatar.com/avatar/' + md5 + '?s=' + size + '&d=retro';
 };
 
-var User = mongoose.model('User', userSchema);
+//var User = mongoose.model('User', userSchema);
+User.defaultColumns = 'username, email';
+Profile.register();
+User.register();
+
 
 module.exports = User;
+
+

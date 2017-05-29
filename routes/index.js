@@ -10,7 +10,7 @@ var nev = require('email-verification')(mongoose);
 
 
 // generating the model, pass the User model defined earlier
-nev.generateTempUserModel(User, function (err, tempUserModel) {
+nev.generateTempUserModel(User.model, function (err, tempUserModel) {
     if (err) {
         console.log(err);
         return;
@@ -25,7 +25,7 @@ nev.generateTempUserModel(User, function (err, tempUserModel) {
 
 nev.configure({
     verificationURL: process.env.URL + '/email-verification/${URL}',
-    persistentUserModel: User,
+    persistentUserModel: User.model,
     tempUserCollection: 'temporary_users',
 
     transportOptions: {
@@ -112,14 +112,14 @@ router.post('/signup', function (req, res, next) {
         return res.redirect('/');
     }
 
-    var user = new User({
+    var user = new User.model({
         username: req.body.username,
         email: req.body.email,
         password: req.body.password
     });
 
 
-    User.findOne({$or: [{email: req.body.email}, {username: req.body.username}]}, function (err, existingUser) {
+    User.model.findOne({$or: [{email: req.body.email}, {username: req.body.username}]}, function (err, existingUser) {
         if (existingUser) {
             req.flash('error', 'Account with that email address already exists.');
             return res.redirect('/');

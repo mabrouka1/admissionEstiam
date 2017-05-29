@@ -18,6 +18,8 @@ var upload = multer({storage: storage}).single('file');
 
 
 var Candidacy = require('../models/Dossier');
+var Candidate = require('../models/Candidate');
+var Adresse = require('../models/Adresse');
 
 /* GET users Home. */
 router.get('/', function (req, res, next) {
@@ -27,7 +29,7 @@ router.get('/', function (req, res, next) {
 
 /* GET users Home. */
 router.get('/candidacy', function (req, res, next) {
-    Candidacy.findOne({_id: req.user._id}, function (err, existingCandidacy) {
+    Candidacy.model.findOne({_id: req.user._id}, function (err, existingCandidacy) {
 
         res.render('users/candidacy', {
             admission: 'active',
@@ -69,7 +71,15 @@ router.post('/candidacy', function (req, res, next) {
     var candidacy = {_id: req.user._id};
     switch (data.form) {
         case 'form_info':
-            candidacy.candidate = {
+            var adresse = new Adresse.model({
+                address: data.address,
+                compl_adresse: data.compl_adresse,
+                pays: data.pays,
+                ville: data.ville,
+                code_postal: data.code_postal
+            });
+            adresse.save();
+            var candidate = new Candidate.model({
                 civilite: data.civilite,
                 nom: data.nom,
                 prenom: data.prenom,
@@ -79,20 +89,34 @@ router.post('/candidacy', function (req, res, next) {
                 pays_d_naiss: data.pays_d_naiss,
                 nationalite: data.nationalite,
                 date_d_naiss: moment(data.date_d_naiss, "DD-MM-YYYY"),
-                adresse: {
-                    address: data.address,
-                    compl_adresse: data.compl_adresse,
-                    pays: data.pays,
-                    ville: data.ville,
-                    code_postal: data.code_postal
-                },
-                contact: {
-                    telfixe: data.telfixe,
-                    telmob: data.telmob,
-                    email: data.email,
-                    skype: data.skype
-                }
-            };
+                adresse: adresse,
+            });
+            candidate.save();
+            candidacy.candidate = candidate;
+            /*candidacy.candidate = {
+             civilite: data.civilite,
+             nom: data.nom,
+             prenom: data.prenom,
+             nom_d_naiss: data.nom_d_naiss,
+             dept_d_naiss: data.dept_d_naiss,
+             ville_d_naiss: data.ville_d_naiss,
+             pays_d_naiss: data.pays_d_naiss,
+             nationalite: data.nationalite,
+             date_d_naiss: moment(data.date_d_naiss, "DD-MM-YYYY"),
+             adresse: {
+             address: data.address,
+             compl_adresse: data.compl_adresse,
+             pays: data.pays,
+             ville: data.ville,
+             code_postal: data.code_postal
+             },
+             contact: {
+             telfixe: data.telfixe,
+             telmob: data.telmob,
+             email: data.email,
+             skype: data.skype
+             }
+             };*/
             break;
         case 'form_father':
             candidacy.father = {
@@ -211,12 +235,12 @@ router.post('/candidacy', function (req, res, next) {
                 sejour: {
                     number: data.sjr_number,
                     date: moment(data.sjr_date, "DD-MM-YYYY") || null,
-                    file: JSON.parse(data.file_sjr || '{}') ,
+                    file: JSON.parse(data.file_sjr || '{}'),
                 },
                 academy: {
-                    last_report: JSON.parse(data.file_blt_last || '{}') ,
-                    prev_report: JSON.parse(data.file_blt_prev || '{}') ,
-                    high_diploma: JSON.parse(data.file_dlp || '{}') ,
+                    last_report: JSON.parse(data.file_blt_last || '{}'),
+                    prev_report: JSON.parse(data.file_blt_prev || '{}'),
+                    high_diploma: JSON.parse(data.file_dlp || '{}'),
 
                 }
             };
@@ -251,8 +275,9 @@ router.get('/messages', function (req, res, next) {
     res.render('users/messages', {dashboard: 'active', title: 'Messages Estiam - Espace Admission'});
 });
 
+
 function saveOrUpdateCandidateForm(id, candidacy) {
-    return Candidacy.update({_id: id}, candidacy, {
+    return Candidacy.model.update({_id: id}, candidacy, {
         upsert: true,
         setDefaultsOnInsert: true
     })

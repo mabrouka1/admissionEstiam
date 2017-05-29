@@ -9,7 +9,7 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
+    User.model.findById(id, function(err, user) {
         done(err, user);
     });
 });
@@ -18,7 +18,7 @@ passport.deserializeUser(function(id, done) {
  * Sign in using Email and Password.
  */
 passport.use(new LocalStrategy({ usernameField: 'username' }, function(username, password, done) {
-    User.findOne({$or: [{email: username.toLowerCase()}, {username: username.toLowerCase()}]}, function(err, user) {
+    User.model.findOne({$or: [{email: username.toLowerCase()}, {username: username.toLowerCase()}]}, function(err, user) {
         if (!user) {
             return done(null, false, { msg: 'Email ' + email + ' not found.' });
         }
