@@ -1,4 +1,7 @@
 <% var exist =  ( existingCandidacy != null && existingCandidacy.files != null ? true : false) %>
+<% var identity_exist =  ( exist && existingCandidacy.files.identity != null ? true : false) %>
+<% var sejour_exist =  ( exist && existingCandidacy.files.sejour != null ? true : false) %>
+<% var academy_exist =  ( exist && existingCandidacy.files.academy != null ? true : false) %>
 <form>
     <div class="panel panel-info">
         <div class="panel-heading">
@@ -23,7 +26,7 @@
             </div>
             <div class="form-group col-md-12">
                 <label>Numéro de la pièce d'identité:</label>
-                <input  value="<%= (exist && typeof existingCandidacy.files.identity.number != 'undefined' ? existingCandidacy.files.identity.number : '') %>"
+                <input  value="<%= (exist && identity_exist && typeof existingCandidacy.files.identity.number != 'undefined' ? existingCandidacy.files.identity.number : '') %>"
                        name="cni_number" type="text"
                         data-validation="length"
                         data-validation-length="min5"
@@ -31,7 +34,7 @@
             </div>
             <div class="form-group col-md-12">
                 <label>Date d'expiration :</label>
-                <input value="<%= (exist && typeof existingCandidacy.files.identity.date != 'undefined' ? moment(existingCandidacy.files.identity.date).format('DD-MM-YYYY') : '') %>"
+                <input value="<%= (exist && identity_exist && typeof existingCandidacy.files.identity.date != 'undefined' ? moment(existingCandidacy.files.identity.date).format('DD-MM-YYYY') : '') %>"
                        data-validation="date"
                        data-validation-format="dd-mm-yyyy"
                        name="cni_date" type="text" class="form-control date">
@@ -46,14 +49,14 @@
                         </div>
                     </div>
                     choisir le fichier
-                    <input value="<%= (exist && typeof existingCandidacy.files.identity.file != 'undefined' ? JSON.stringify(existingCandidacy.files.identity.file) : '') %>" type="hidden" name="file_cni"/>
+                    <input value="<%= (exist && identity_exist && typeof existingCandidacy.files.identity.file != 'undefined' ? JSON.stringify(existingCandidacy.files.identity.file) : '') %>" type="hidden" name="file_cni"/>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="alert alert-info" role="alert">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     <div class="file-info file_cni">
-                        <%= (exist && typeof existingCandidacy.files.identity.file.originalname != 'undefined' ? existingCandidacy.files.identity.file.originalname : 'Aucun Fichier Enregisté !') %>
+                        <%= (exist && identity_exist && typeof existingCandidacy.files.identity.file.originalname != 'undefined' ? existingCandidacy.files.identity.file.originalname : 'Aucun Fichier Enregisté !') %>
                     </div>
                 </div>
             </div>
@@ -61,7 +64,7 @@
         <div class="col-md-4">
             <div class="form-group col-md-12">
                 <label>Titre de séjour : numéro du titre de séjour:</label>
-                <input value="<%= (exist && typeof existingCandidacy.files.sejour.number != 'undefined' ? existingCandidacy.files.identity.number : '') %>"
+                <input value="<%= (exist && sejour_exist && typeof existingCandidacy.files.sejour.number != 'undefined' ? existingCandidacy.files.sejour.number : '') %>"
                        name="sjr_number"
                        data-validation="length"
                        data-validation-length="min5"
@@ -69,7 +72,7 @@
             </div>
             <div class="form-group col-md-12">
                 <label>Date d'expiration :</label>
-                <input value="<%= (exist && typeof existingCandidacy.files.identity.date != 'undefined' ? moment(existingCandidacy.files.sejour.date).format('DD-MM-YYYY') : '') %>"
+                <input value="<%= (exist && sejour_exist && typeof existingCandidacy.files.sejour.date != 'undefined' ? moment(existingCandidacy.files.sejour.date).format('DD-MM-YYYY') : '') %>"
                        data-validation="date"
                        data-validation-format="dd-mm-yyyy"
                        name="sjr_date" type="text" class="form-control date">
@@ -85,7 +88,7 @@
                         </div>
                     </div>
                     choisir le fichier
-                    <input value="<%= (exist && typeof existingCandidacy.files.sejour.file != 'undefined' ? JSON.stringify(existingCandidacy.files.sejour.file) : '') %>" type="hidden" name="file_sjr"/>
+                    <input value="<%= (exist && sejour_exist && typeof existingCandidacy.files.sejour.file != 'undefined' ? JSON.stringify(existingCandidacy.files.sejour.file) : '') %>" type="hidden" name="file_sjr"/>
                 </div>
 
             </div>
@@ -93,7 +96,7 @@
                 <div class="alert alert-info" role="alert">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     <div class="file-info file_sjr">
-                        <%= (exist && typeof existingCandidacy.files.sejour.file.originalname != 'undefined' ? existingCandidacy.files.sejour.file.originalname : 'Aucun Fichier Enregisté !') %>
+                        <%= (exist && sejour_exist && typeof existingCandidacy.files.sejour.file.originalname != 'undefined' ? existingCandidacy.files.sejour.file.originalname : 'Aucun Fichier Enregisté !') %>
                     </div>
                 </div>
             </div>
@@ -110,7 +113,7 @@
                         </div>
                     </div>
                     choisir le fichier
-                    <input value="<%= (exist && typeof existingCandidacy.files.academy.last_report != 'undefined' ? JSON.stringify(existingCandidacy.files.academy.last_report) : '') %>" type="hidden" name="file_blt_last"/>
+                    <input value="<%= (exist && academy_exist && typeof existingCandidacy.files.academy.last_report != 'undefined' ? JSON.stringify(existingCandidacy.files.academy.last_report) : '') %>" type="hidden" name="file_blt_last"/>
                 </div>
 
             </div>
@@ -118,7 +121,7 @@
                 <div class="alert alert-info" role="alert">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     <div class="file-info file_blt_last">
-                        <%= (exist && typeof existingCandidacy.files.academy.last_report != 'undefined' ? existingCandidacy.files.academy.last_report.originalname : 'Aucun Fichier Enregisté !') %>
+                        <%= (exist && academy_exist && typeof existingCandidacy.files.academy.last_report != 'undefined' ? existingCandidacy.files.academy.last_report.originalname : 'Aucun Fichier Enregisté !') %>
                     </div>
                 </div>
             </div>
@@ -132,7 +135,7 @@
                         </div>
                     </div>
                     choisir le fichier
-                    <input value=" <%= (exist && typeof existingCandidacy.files.academy.prev_report != 'undefined' ? JSON.stringify(existingCandidacy.files.academy.prev_report) : '') %>" type="hidden" name="file_blt_prev"/>
+                    <input value=" <%= (exist && academy_exist && typeof existingCandidacy.files.academy.prev_report != 'undefined' ? JSON.stringify(existingCandidacy.files.academy.prev_report) : '') %>" type="hidden" name="file_blt_prev"/>
                 </div>
 
             </div>
@@ -140,7 +143,7 @@
                 <div class="alert alert-info" role="alert">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     <div class="file-info file_blt_prev">
-                        <%= (exist && typeof existingCandidacy.files.academy.prev_report != 'undefined' ? existingCandidacy.files.academy.prev_report.originalname : 'Aucun Fichier Enregisté !') %>
+                        <%= (exist && academy_exist && typeof existingCandidacy.files.academy.prev_report != 'undefined' ? existingCandidacy.files.academy.prev_report.originalname : 'Aucun Fichier Enregisté !') %>
                     </div>
                 </div>
             </div>
@@ -155,7 +158,7 @@
                         </div>
                     </div>
                     choisir le fichier
-                    <input value="<%= (exist && typeof existingCandidacy.files.academy.high_diploma != 'undefined' ? JSON.stringify(existingCandidacy.files.academy.high_diploma) : '') %>" type="hidden" name="file_dlp"/>
+                    <input value="<%= (exist && academy_exist && typeof existingCandidacy.files.academy.high_diploma != 'undefined' ? JSON.stringify(existingCandidacy.files.academy.high_diploma) : '') %>" type="hidden" name="file_dlp"/>
                 </div>
 
             </div>
@@ -163,7 +166,7 @@
                 <div class="alert alert-info" role="alert">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     <div class="file-info file_dlp">
-                        <%= (exist && typeof existingCandidacy.files.academy.high_diploma != 'undefined' ? existingCandidacy.files.academy.high_diploma.originalname : 'Aucun Fichier Enregisté !') %>
+                        <%= (exist && academy_exist && typeof existingCandidacy.files.academy.high_diploma != 'undefined' ? existingCandidacy.files.academy.high_diploma.originalname : 'Aucun Fichier Enregisté !') %>
                     </div>
                 </div>
             </div>

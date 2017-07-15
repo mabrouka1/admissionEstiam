@@ -1,9 +1,10 @@
 var mongoose = require('mongoose');
-
 var keystone = require('keystone');
 var Types = keystone.Field.Types;
 
-var Candidate = new keystone.List('Candidate');
+var Candidate = new keystone.List('Candidate', {
+        map : {name : 'nom'}
+});
 
 Candidate.add(
     {
@@ -16,8 +17,8 @@ Candidate.add(
         pays_d_naiss: {type: String},
         nationalite: {type: String},
         date_d_naiss: {type: Types.Date},
-        adresse: {type: Types.Relationship, ref: 'Adresse'},
-        contact: {type: Types.Relationship, ref: 'Contact'},
+        adresse: {type: Types.Relationship, ref: 'Adresse', many: false},
+        contact: {type: Types.Relationship, ref: 'Contact', many: false},
 
     });
 Candidate.register();

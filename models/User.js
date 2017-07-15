@@ -34,31 +34,6 @@ User.schema.virtual('canAccessKeystone').get(function () {
     return false;
 });
 
-
-
-
-/**
- * Password hash middleware.
- */
-User.schema.pre('save', function (next) {
-    var user = this;
-    if (!user.isModified('password')) {
-        return next();
-    }
-    bcrypt.genSalt(10, function (err, salt) {
-        if (err) {
-            return next(err);
-        }
-        bcrypt.hash(user.password, salt, null, function (err, hash) {
-            if (err) {
-                return next(err);
-            }
-            user.password = hash;
-            next();
-        });
-    });
-});
-
 /**
  * Helper method for validating user's password.
  */
@@ -82,7 +57,6 @@ User.schema.methods.gravatar = function (size) {
     return 'https://gravatar.com/avatar/' + md5 + '?s=' + size + '&d=retro';
 };
 
-//var User = mongoose.model('User', userSchema);
 User.defaultColumns = 'username, email';
 Profile.register();
 User.register();
