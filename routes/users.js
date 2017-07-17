@@ -491,11 +491,11 @@ router.post('/candidacy', function (req, res, next) {
                     });
                 }
                 identity.save();
-
                 var sejour = new Sejour.model({
                     number: data.sjr_number,
                     date: moment(data.sjr_date, "DD-MM-YYYY") || null,
                     file: JSON.parse(data.file_sjr || '{}'),
+                    url: `<a href="/uploads/${JSON.parse(data.file_sjr || '{}').filename || ''}">${JSON.parse(data.file_sjr || '{}').filename || ''} </a>`
                 });
                 if (typeof candidacy.files !== 'undefined' && candidacy.files.sejour !== null) {
                     Sejour.model.remove({_id: candidacy.files.sejour}, function (err) {
@@ -505,7 +505,7 @@ router.post('/candidacy', function (req, res, next) {
                         }
                     });
                 }
-               sejour.save();
+                sejour.save();
 
                 var academy = new Academy.model({
                     last_report: JSON.parse(data.file_blt_last || '{}'),
