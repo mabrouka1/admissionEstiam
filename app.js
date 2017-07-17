@@ -7,7 +7,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var MongoStore = require('connect-mongo/es5')(session);
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
+require('mongoose-moment')(mongoose)
+require('mongoose-deep-populate')(mongoose);
 var nev = require('email-verification')(mongoose);
 var dotenv = require('dotenv');
 var errorHandler = require('errorhandler');
@@ -16,6 +18,7 @@ var expressValidator = require('express-validator');
 var passport = require('passport');
 var body = require('body-parser');
 var keystone = require('keystone');
+
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -47,6 +50,7 @@ mongoose.connection.on('error', function() {
     console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
     process.exit(1);
 });
+
 
 
 app.engine('ejs', engine);

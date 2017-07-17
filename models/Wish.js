@@ -2,7 +2,9 @@ var mongoose = require('mongoose');
 
 var keystone = require('keystone');
 var Types = keystone.Field.Types;
-var Wish = new keystone.List('Wish');
+var Wish = new keystone.List('Wish',{
+    map : {name : 'cursus'}
+});
 
 
 Wish.add({
